@@ -7,8 +7,8 @@ namespace a_zApi.IServices
     {
         Task<StudentResponse> CreateStudent(StudentRequest studentRequest);
         Task<List<StudentResponse>> GetAllStudent();
-        Task<StudentResponse> GetStudentById(Guid StudentId);
-        Task<StudentResponse> DeleteStudentById(Guid StudentId);
-        Task<StudentResponse> UpdateStudent(Guid StudentId, StudentRequest studentRequest);
+        Task<StudentResponse> GetStudentById(string NicNo);
+        Task<StudentResponse> DeleteStudentById(string NicNo);
+        Task<StudentResponse> UpdateStudent(string NicNo, StudentRequest studentRequest);
     }
 }

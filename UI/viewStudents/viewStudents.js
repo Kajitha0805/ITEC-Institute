@@ -18,13 +18,13 @@ async function getAllStudents(){
         let idcell = document.createElement('td');
         idcell.style.padding = "20px";
         idcell.style.textAlign = "center";
-        idcell.textContent = e.id;
+        idcell.textContent = e.nicNo;
         row.appendChild(idcell);
 
         let fnamecell = document.createElement('td');
         fnamecell.style.padding = "20px";
         fnamecell.style.textAlign = "center";
-        fnamecell.textContent = e.firstname;
+        fnamecell.textContent = e.firstName;
         row.appendChild(fnamecell);
 
         let batchcell = document.createElement('td');
@@ -36,7 +36,7 @@ async function getAllStudents(){
         let coursecell = document.createElement('td');
         coursecell.style.padding = "20px";
         coursecell.style.textAlign = "center";
-        coursecell.textContent = e.course;
+        coursecell.textContent = e.courseId;
         row.appendChild(coursecell);
 
         let dateofjoincell = document.createElement('td');
@@ -48,7 +48,7 @@ async function getAllStudents(){
         let mobilecell = document.createElement('td');
         mobilecell.style.padding = "20px";
         mobilecell.style.textAlign = "center";
-        mobilecell.textContent = e.mobile;
+        mobilecell.textContent = e.mobileNo;
         row.appendChild(mobilecell);
 
         let emailcell = document.createElement('td');

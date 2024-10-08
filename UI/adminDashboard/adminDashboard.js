@@ -373,12 +373,12 @@ reversedBatch.forEach(e => {
 // ......................................................................................
 // Register Add Button
 
-let RegFee = await getRegFee();
-let sRegFee = await RegFee.find(e => e.id === "1");
-let finalRegFee = sRegFee.regfee;
+// let RegFee = await getRegFee();
+// let sRegFee = await RegFee.find(e => e.nicNo === "1");
+// let finalRegFee = sRegFee.regfee;
 
-let stuRegFee = document.getElementById("stuRegFee");
-stuRegFee.value = finalRegFee;
+// let stuRegFee = document.getElementById("stuRegFee");
+// stuRegFee.value = finalRegFee;
 
 
 
@@ -388,7 +388,7 @@ document.getElementById("register").addEventListener('submit', async function(ev
 
     let allStudents = await getStudents();
     
-    if(await allStudents.find(e => e.id === stuId)){
+    if(await allStudents.find(e => e.nicNo === stuId)){
         alert("The Student ID is already exists");
     
     }
@@ -404,7 +404,7 @@ document.getElementById("register").addEventListener('submit', async function(ev
     let stuAddress = document.getElementById("stuAddress").value;  
     let stuAddiFee = document.getElementById("stuAddiFee").value;
 
-    let studentObject = {stuid:stuId, stufname:stuFName, stulname:stuLName, stucourse:selectCourse, stubatch:stuBatch, studate:stuDate, stumobile:stuMobile, stuemail:stuEmail, stuaddress:stuAddress, sturegfee:finalRegFee, stuaddifee:stuAddiFee};
+    let studentObject = {nicNo:stuId, firstName:stuFName, lastName:stuLName, courseId:selectCourse, batch:stuBatch, date:stuDate, mobileNo:stuMobile, email:stuEmail, address:stuAddress, regFee:finalRegFee, additionalFee:stuAddiFee};
 
     let paymentObject = {studentId:stuId, studentDate:stuDate, studentAddiFee:stuAddiFee};
     
@@ -448,12 +448,12 @@ search.onclick = async function(){
     let e = wholeStudents.find(e => e.id === id);
     errMessage.textContent = "";
     document.getElementById("editDynamic").style.display = "block";
-    document.getElementById("seId").value = e.id;
-    document.getElementById("seFname").value = e.firstname;
-    document.getElementById("seLname").value = e.lastname;
-    document.getElementById("seCourse").value = e.course;
+    document.getElementById("seId").value = e.nicNo;
+    document.getElementById("seFname").value = e.firstName;
+    document.getElementById("seLname").value = e.lastName;
+    document.getElementById("seCourse").value = e.courseId;
     document.getElementById("seBatch").value = e.batch;
-    document.getElementById("seMobile").value = e.mobile;
+    document.getElementById("seMobile").value = e.mobileNo;
     document.getElementById("seEmail").value = e.email;
     document.getElementById("seAddress").value = e.address;
     }
@@ -536,12 +536,12 @@ document.getElementById("removeSearch").onclick = async function(){
     let removeSearchId = document.getElementById("removeSearchId").value;
     let student = await getStudents();
 
-    if(student.find(e => e.id === removeSearchId)){
-    let e = student.find(e => e.id === removeSearchId);
+    if(student.find(e => e.nicNo === removeSearchId)){
+    let e = student.find(e => e.nicNo === removeSearchId);
     removeError.textContent = "";
     removeDynamic.style.display = "flex";
-    document.getElementById("removeId").innerText = e.id;
-    document.getElementById("removeName").innerText = e.firstname;
+    document.getElementById("removeId").innerText = e.nicNo;
+    document.getElementById("removeName").innerText = e.firstName;
     document.getElementById("removeBatch").innerText = e.batch;
     }
     else{
@@ -807,17 +807,17 @@ async function displayLastStudents(){
 
         let idCell = document.createElement('td');
         idCell.style.padding = "3px";
-        idCell.textContent = e.id;
+        idCell.textContent = e.nicNo;
         row.appendChild(idCell);
 
         let nameCell = document.createElement('td');
         nameCell.style.padding = "3px";
-        nameCell.textContent = e.firstname;
+        nameCell.textContent = e.firstName;
         row.appendChild(nameCell);
 
         let courseCell = document.createElement('td');
         courseCell.style.padding = "3px";
-        courseCell.textContent = e.course;
+        courseCell.textContent = e.courseId;
         row.appendChild(courseCell);
 
         let dateCell = document.createElement('td');

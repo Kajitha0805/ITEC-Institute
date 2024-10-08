@@ -30,22 +30,23 @@ export async function addStudents(obj){
 // }
 
 export async function updateStudent(putId, putStudents) {
-  const response = await fetch(`http://localhost:3000/students/${putId}`, {
+  const response = await fetch(`http://localhost:5064/api/Student/Update_Student?NicNo=${putId}`, {
     method: 'PATCH',
     headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({firstname:putStudents.Fname, lastname:putStudents.Lname, course:putStudents.Course, batch:putStudents.Batch, mobile:putStudents.Mobile, email:putStudents.Email, address:putStudents.Address})
+    body: JSON.stringify({firstName:putStudents.Fname, lastName:putStudents.Lname, courseId:putStudents.Course, batch:putStudents.Batch, mobileNo:putStudents.Mobile, email:putStudents.Email, address:putStudents.Address})
   });
 }
 
 export async function getStudents() {
-  const response = await fetch('http://localhost:3000/students');
+  const response = await fetch('http://localhost:5064/api/Student/Get_All_Student');
   const data = await response.json();
+  console.log(data);
   return data;
 }
 
 
-export async function removeSingleStudent(id) {
-  await fetch(`http://localhost:3000/students/${id}`, {
+export async function removeSingleStudent(nicNo) {
+  await fetch(`http://localhost:5064/api/Student/Delete_Student-By-Id?NicNo=${nicNo}`, {
   method:'DELETE'
   });
 }
@@ -63,14 +64,13 @@ export async function getCourses() {
   const data = await response.json();
   console.log(data)
   return data;
-  
 }
 
 export async function addNewStudent(obj){
-  await fetch('http://localhost:3000/students',{
+  await fetch('http://localhost:5064/api/Student/Create_Student',{
     method:'POST',
     headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({"id":obj.stuid, "firstname":obj.stufname, "lastname":obj.stulname, "course":obj.stucourse, "batch":obj.stubatch, "date":obj.studate, "mobile":obj.stumobile, "email":obj.stuemail, "address":obj.stuaddress, "regfee":obj.sturegfee, "addifee":obj.stuaddifee})
+    body: JSON.stringify({"id":obj.nicNo, "firstname":obj.firstName, "lastname":obj.lastName, "course":obj.courseId, "batch":obj.batch, "date":obj.date, "mobile":obj.mobileNo, "email":obj.email, "address":obj.address, "regfee":obj.regFee, "addifee":obj.additionalFee})
   })
 }
 

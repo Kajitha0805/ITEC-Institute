@@ -1,15 +1,20 @@
-﻿using Microsoft.VisualBasic;
+﻿using a_zApi.Enitity;
+using Microsoft.VisualBasic;
 
 namespace a_zApi.DTO.RequestDto
 {
     public class StudentRequest
     {
+        public string NicNo { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public DateTime BOD { get; set; }
-        public string NicNumber { get; set; }
-        public int Age { get; set; }
-        public string Gender { get; set; }
-        public string TelNumber { get; set; }
+        public string CourseId { get; set; }
+        public string Batch { get; set; }
+        public DateTime Date { get; set; }
+        public string MobileNo { get; set; }
+        public string Email { get; set; }
+        public string Address { get; set; }
+        public decimal RegFee { get; set; }
+        public decimal AdditionalFee { get; set; }
     }
 }

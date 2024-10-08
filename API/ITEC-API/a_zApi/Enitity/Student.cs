@@ -8,7 +8,7 @@ namespace a_zApi.Enitity
         public string NicNo { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public int CourseId {  get; set; }
+        public string CourseId {  get; set; }
         public Course Course { get; set; }
         public string Batch {  get; set; }
         public DateTime Date {  get; set; }

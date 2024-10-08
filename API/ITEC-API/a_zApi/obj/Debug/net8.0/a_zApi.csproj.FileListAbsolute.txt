@@ -134,3 +134,4 @@ X:\My practices\ITEC-Institute\API\ITEC-API\a_zApi\obj\Debug\net8.0\refint\a_zAp
 X:\My practices\ITEC-Institute\API\ITEC-API\a_zApi\obj\Debug\net8.0\a_zApi.pdb
 X:\My practices\ITEC-Institute\API\ITEC-API\a_zApi\obj\Debug\net8.0\a_zApi.genruntimeconfig.cache
 X:\My practices\ITEC-Institute\API\ITEC-API\a_zApi\obj\Debug\net8.0\ref\a_zApi.dll
+X:\My practices\ITEC-Institute\API\ITEC-API\a_zApi\obj\Debug\net8.0\a_zApi.sourcelink.json
