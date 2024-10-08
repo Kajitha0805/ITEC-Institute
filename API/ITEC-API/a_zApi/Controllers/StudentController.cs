@@ -27,21 +27,21 @@ namespace a_zApi.Controllers
             return Ok(data);
         }
         [HttpGet("Get_Student_By_Id")]
-        public async Task<IActionResult>GetStudentById(Guid StudentId)
+        public async Task<IActionResult>GetStudentById(string NicNo)
         {
-            var data = await _istudentService.GetStudentById(StudentId);
+            var data = await _istudentService.GetStudentById(NicNo);
             return Ok(data);
         }
         [HttpDelete("Delete_Student-By-Id")]
-        public async Task<IActionResult>DeleteStudentById(Guid StudentId)
+        public async Task<IActionResult>DeleteStudentById(string NicNo)
         {
-            var data=await _istudentService.DeleteStudentById(StudentId);
+            var data=await _istudentService.DeleteStudentById(NicNo);
             return Ok(data);
         }
-        [HttpPut("Update_Student")]
-        public async Task<IActionResult>UpdateStudent(Guid StudentId, StudentRequest studentRequest)
+        [HttpPatch("Update_Student")]
+        public async Task<IActionResult>UpdateStudent(string NicNo, StudentRequest studentRequest)
         {
-            var data=await _istudentService.UpdateStudent(StudentId, studentRequest);
+            var data=await _istudentService.UpdateStudent(NicNo, studentRequest);
             return Ok(data);
         }
     }

@@ -6,9 +6,9 @@ namespace a_zApi.IRepository
     {
         Task<Student> CreateStudent(Student student);
         Task<List<Student>> GetAllStudent();
-        Task<Student> GetStudentById(Guid StudentId);
-        Task<Student> DeleteStudentById(Guid StudentId);
-        Task<Student> FindStudentById(Guid StudentId);
+        Task<Student> GetStudentById(string NicNo);
+        Task<Student> DeleteStudentById(string NicNo);
+        Task<Student> FindStudentById(string NicNo);
         Task<Student> UpdateStudent(Student student);
 
     }

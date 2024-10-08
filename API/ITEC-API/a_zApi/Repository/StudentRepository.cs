@@ -17,15 +17,18 @@ namespace a_zApi.Repository
         {
             using(var connection=new SqlConnection(_connectionString))
             {
-                var command = new SqlCommand("INSERT INTO Student(NicNo,FirstName,LastName,BOD,NicNumber,Age,Gender,TelNumber)VALUES(@StudentId,@FirstName,@LastName,@BOD,@NicNumber,@Age,@Gender,@TelNumber)", connection);
-                command.Parameters.AddWithValue("@StudentId", Guid.NewGuid());
+                var command = new SqlCommand("INSERT INTO Student(NicNo,FirstName,LastName,CourseId,Date,Batch,MobileNo,Email,Address,RegFee,AdditionalFee)VALUES(@NicNo,@FirstName,@LastName,@CourseId,@Date,@Batch,@MobileNo,@Email,@Address,@RegFee,@AdditionalFee)", connection);
+                command.Parameters.AddWithValue("@NicNo", student.NicNo);
                 command.Parameters.AddWithValue("@FirstName",student.FirstName);
                 command.Parameters.AddWithValue("@LastName",student.LastName);
-                command.Parameters.AddWithValue("@BOD",student.BOD);
-                command.Parameters.AddWithValue("@NicNumber", student.NicNumber);
-                command.Parameters.AddWithValue("@Age",student.Age);
-                command.Parameters.AddWithValue("@Gender",student.Gender);
-                command.Parameters.AddWithValue("@TelNumber", student.TelNumber);
+                command.Parameters.AddWithValue("@CourseId", student.CourseId);
+                command.Parameters.AddWithValue("@Batch", student.Batch);
+                command.Parameters.AddWithValue("@Date", student.Date);
+                command.Parameters.AddWithValue("@MobileNo", student.MobileNo);
+                command.Parameters.AddWithValue("@Email", student.Email);
+                command.Parameters.AddWithValue("@Address",student.Address);
+                command.Parameters.AddWithValue("@RegFee",student.RegFee);
+                command.Parameters.AddWithValue("@AdditionalFee",student.AdditionalFee);
 
                 await connection.OpenAsync();
                 await command.ExecuteNonQueryAsync();
@@ -46,14 +49,17 @@ namespace a_zApi.Repository
                     {
                         students.Add(new Student
                         {
-                            StudentId=reader.GetGuid(0),
+                            NicNo=reader.GetString(0),
                             FirstName=reader.GetString(1),
                             LastName=reader.GetString(2),
-                            BOD=reader.GetDateTime(3),
-                            NicNumber=reader.GetString(4),
-                            Age=reader.GetInt32(5),
-                            Gender=reader.GetString(6),
-                            TelNumber=reader.GetString(7),
+                            CourseId=reader.GetString(3),
+                            Batch=reader.GetString(4),
+                            Date=reader.GetDateTime(5),
+                            MobileNo=reader.GetString(6),
+                            Email=reader.GetString(7),
+                            Address=reader.GetString(8),
+                            RegFee=reader.GetDecimal(9),
+                            AdditionalFee=reader.GetDecimal(10),
 
                         });
                     }
@@ -61,13 +67,13 @@ namespace a_zApi.Repository
                 return students;
             }
         }
-        public async Task<Student> GetStudentById(Guid StudentId)
+        public async Task<Student> GetStudentById(string NicNo)
         {
             Student student=null;
             using( var connection=new SqlConnection(_connectionString))
             {
-                var command = new SqlCommand("SELECT * FROM Student WHERE StudentId=@StudentId",connection);
-                command.Parameters.AddWithValue("StudentId", StudentId);
+                var command = new SqlCommand("SELECT * FROM Student WHERE NicNo=@NicNo", connection);
+                command.Parameters.AddWithValue("NicNo", NicNo);
                 await connection.OpenAsync();
                 using(var reader=await command.ExecuteReaderAsync())
                 {
@@ -75,14 +81,17 @@ namespace a_zApi.Repository
                     {
                         student=new Student
                         {
-                            StudentId=reader.GetGuid(0),
-                            FirstName=reader.GetString(1),
-                            LastName=reader.GetString(2),
-                            BOD=reader.GetDateTime(3),
-                            NicNumber=reader.GetString(4),
-                            Age=reader.GetInt32(5),
-                            Gender=reader.GetString(6),
-                            TelNumber=reader.GetString(7),
+                            NicNo = reader.GetString(0),
+                            FirstName = reader.GetString(1),
+                            LastName = reader.GetString(2),
+                            CourseId = reader.GetString(3),
+                            Batch = reader.GetString(4),
+                            Date = reader.GetDateTime(5),
+                            MobileNo = reader.GetString(6),
+                            Email = reader.GetString(7),
+                            Address = reader.GetString(8),
+                            RegFee = reader.GetDecimal(9),
+                            AdditionalFee = reader.GetDecimal(10),
 
                         };
 
@@ -91,13 +100,13 @@ namespace a_zApi.Repository
                 return student;
             }
         }
-        public async Task<Student>DeleteStudentById(Guid StudentId)
+        public async Task<Student>DeleteStudentById(string NicNo)
         {
             Student student=null;
             using(var connection=new SqlConnection(_connectionString))
             {
-                var command = new SqlCommand("SELECT * FROM Student WHERE StudentId=@StudentId", connection);
-                command.Parameters.AddWithValue("@StudentId", StudentId);
+                var command = new SqlCommand("SELECT * FROM Student WHERE NicNo=@NicNo", connection);
+                command.Parameters.AddWithValue("@NicNo", NicNo);
                 await connection.OpenAsync();
                 using(var reader=await command.ExecuteReaderAsync())
                 {
@@ -105,35 +114,38 @@ namespace a_zApi.Repository
                     {
                         student = new Student
                         {
-                            StudentId = reader.GetGuid(0),
-                            FirstName=reader.GetString(1),
-                            LastName=reader.GetString(2),
-                            BOD=reader.GetDateTime(3),
-                            NicNumber=reader.GetString(4),
-                            Age=reader.GetInt32(5),
-                            Gender=reader.GetString(6),
-                            TelNumber=reader.GetString(7),
+                            NicNo = reader.GetString(0),
+                            FirstName = reader.GetString(1),
+                            LastName = reader.GetString(2),
+                            CourseId = reader.GetString(3),
+                            Batch = reader.GetString(4),
+                            Date = reader.GetDateTime(5),
+                            MobileNo = reader.GetString(6),
+                            Email = reader.GetString(7),
+                            Address = reader.GetString(8),
+                            RegFee = reader.GetDecimal(9),
+                            AdditionalFee = reader.GetDecimal(10),
                         };
 
                     }
                 }
                 if(student!=null)
                 {
-                    var deleteCommand = new SqlCommand("DELETE FROM Student WHERE StudentId=@StudentId", connection);
-                    deleteCommand.Parameters.AddWithValue("@StudentId", StudentId);
+                    var deleteCommand = new SqlCommand("DELETE FROM Student WHERE NicNo=@NicNo", connection);
+                    deleteCommand.Parameters.AddWithValue("@NicNo", NicNo);
                     await deleteCommand.ExecuteNonQueryAsync();
                 }
 
             }
             return student;
         }
-        public async Task<Student> FindStudentById(Guid StudentId)
+        public async Task<Student> FindStudentById(string NicNo)
         {
             Student student = null;
             using(var connection=new SqlConnection(_connectionString))
             {
-                var command = new SqlCommand("SELECT * FROM Student WHERE StudentId=@StudentId", connection);
-                command.Parameters.AddWithValue("@StudentId", StudentId);
+                var command = new SqlCommand("SELECT * FROM Student WHERE NicNo=@NicNo", connection);
+                command.Parameters.AddWithValue("@NicNo", NicNo);
                 await connection.OpenAsync();
                 using(var reader=await command.ExecuteReaderAsync())
                 {
@@ -141,14 +153,17 @@ namespace a_zApi.Repository
                     {
                         student = new Student
                         {
-                            StudentId = reader.GetGuid(0),
-                            FirstName=reader.GetString(1),
-                            LastName=reader.GetString(2),
-                            BOD=reader.GetDateTime(3),
-                            NicNumber=reader.GetString(4),
-                            Age=reader.GetInt32(5),
-                            Gender=reader.GetString(6),
-                            TelNumber=reader.GetString(7)
+                            NicNo = reader.GetString(0),
+                            FirstName = reader.GetString(1),
+                            LastName = reader.GetString(2),
+                            CourseId = reader.GetString(3),
+                            Batch = reader.GetString(4),
+                            Date = reader.GetDateTime(5),
+                            MobileNo = reader.GetString(6),
+                            Email = reader.GetString(7),
+                            Address = reader.GetString(8),
+                            RegFee = reader.GetDecimal(9),
+                            AdditionalFee = reader.GetDecimal(10),
                         };
 
                     }
@@ -161,15 +176,18 @@ namespace a_zApi.Repository
             Student updateStudent = null;
             using(var connection=new SqlConnection(_connectionString))
             {
-                var command = new SqlCommand("UPDATE Student SET StudentId = @StudentId, FirstName = @FirstName, LastName = @LastName,BOD=@BOD,NicNumber=@NicNumber,Age=@Age,Gender=@Gender,TelNumber=@TelNumber WHERE StudentId = @StudentId", connection);
-                command.Parameters.AddWithValue("@StudentId", student.StudentId);
-                command.Parameters.AddWithValue("FirstName",student.FirstName);
-                command.Parameters.AddWithValue("LastName",student.LastName);
-                command.Parameters.AddWithValue("BOD",student.BOD);
-                command.Parameters.AddWithValue("NicNumber",student.NicNumber);
-                command.Parameters.AddWithValue("Age",student.Age);
-                command.Parameters.AddWithValue("Gender",student.Gender);
-                command.Parameters.AddWithValue("TelNumber",student.TelNumber);
+                var command = new SqlCommand("UPDATE Student SET NicNo =@NicNo, FirstName = @FirstName, LastName = @LastName,CourseId=@CourseId,Batch=@Batch,Date=@Date,MobileNo=@MobileNo,Email=@Email,Address=@Address,RegFee=@RegFee,AdditionalFee=@AdditionalFee WHERE NicNo = @NicNo", connection);
+                command.Parameters.AddWithValue("@NicNo", student.NicNo);
+                command.Parameters.AddWithValue("@FirstName", student.FirstName);
+                command.Parameters.AddWithValue("@LastName", student.LastName);
+                command.Parameters.AddWithValue("@CourseId", student.CourseId);
+                command.Parameters.AddWithValue("@Batch", student.Batch);
+                command.Parameters.AddWithValue("@Date", student.Date);
+                command.Parameters.AddWithValue("@MobileNo", student.MobileNo);
+                command.Parameters.AddWithValue("@Email", student.Email);
+                command.Parameters.AddWithValue("@Address", student.Address);
+                command.Parameters.AddWithValue("@RegFee", student.RegFee);
+                command.Parameters.AddWithValue("@AdditionalFee", student.AdditionalFee);
 
                 await connection.OpenAsync();
 

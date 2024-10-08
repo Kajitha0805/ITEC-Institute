@@ -16,25 +16,32 @@ namespace a_zApi.Services
         public async Task<StudentResponse>CreateStudent(StudentRequest studentRequest)
         {
             var inputStudent = new Student();
+            inputStudent.NicNo = studentRequest.NicNo;
             inputStudent.FirstName = studentRequest.FirstName;
             inputStudent.LastName = studentRequest.LastName;
-            inputStudent.BOD = studentRequest.BOD;
-            inputStudent.NicNumber = studentRequest.NicNumber;
-            inputStudent.Age = studentRequest.Age;
-            inputStudent.Gender = studentRequest.Gender;
-            inputStudent.TelNumber = studentRequest.TelNumber;
+            inputStudent.CourseId = studentRequest.CourseId;
+            inputStudent.Batch = studentRequest.Batch;
+            inputStudent.Date = studentRequest.Date;
+            inputStudent.MobileNo = studentRequest.MobileNo;
+            inputStudent.Email = studentRequest.Email;
+            inputStudent.Address = studentRequest.Address;
+            inputStudent.RegFee = studentRequest.RegFee;
+            inputStudent.AdditionalFee = studentRequest.AdditionalFee;
 
             var addinputStudent=await _istudentRepository.CreateStudent(inputStudent);
 
             var response=new StudentResponse();
-            response.StudentId = addinputStudent.StudentId;
-            response.FirstName = addinputStudent.FirstName;
-            response.LastName = addinputStudent.LastName;
-            response.BOD = addinputStudent.BOD;
-            response.NicNumber=addinputStudent.NicNumber;
-            response.Age = addinputStudent.Age;
-            response.Gender = addinputStudent.Gender;
-            response.TelNumber = addinputStudent.TelNumber;
+            response.NicNo=inputStudent.NicNo;
+            response.FirstName=inputStudent.FirstName;
+            response.LastName=inputStudent.LastName;
+            response.CourseId=inputStudent.CourseId;
+            response.Batch=inputStudent.Batch;
+            response.Date = studentRequest.Date;
+            response.MobileNo=inputStudent.MobileNo;
+            response.Email=studentRequest.Email;
+            response.Address=studentRequest.Address;
+            response.RegFee=studentRequest.RegFee;
+            response.AdditionalFee=studentRequest.AdditionalFee;
             return response;
         }
 
@@ -45,61 +52,74 @@ namespace a_zApi.Services
             foreach (var student in data)
             {
                 var res=new StudentResponse();
-                res.StudentId = student.StudentId;
+               res.NicNo = student.NicNo;
                 res.FirstName=student.FirstName;
                 res.LastName=student.LastName;
-                res.BOD=student.BOD;
-                res.NicNumber = student.NicNumber;
-                res.Age = student.Age;
-                res.Gender = student.Gender;
-                res.TelNumber = student.TelNumber;
+                res.CourseId=student.CourseId;
+                res.Batch=student.Batch;
+                res.Date=student.Date;
+                res.MobileNo=student.MobileNo;
+                res.Email=student.Email;
+                res.Address=student.Address;
+                res.RegFee=student.RegFee;
+                res.AdditionalFee=student.AdditionalFee;
                 response.Add(res);
             }
             return response;
         }
-        public async Task<StudentResponse>GetStudentById(Guid StudentId)
+        public async Task<StudentResponse>GetStudentById(string NicNo)
         {
-            var data=await _istudentRepository.GetStudentById(StudentId);
+            var data=await _istudentRepository.GetStudentById(NicNo);
             var response=new StudentResponse();
-            response.StudentId = data.StudentId;
+            response.NicNo=data.NicNo;
             response.FirstName=data.FirstName;
             response.LastName=data.LastName;
-            response.BOD=data.BOD;
-            response.NicNumber=data.NicNumber;
-            response.Age=data.Age;
-            response.Gender=data.Gender;
-            response.TelNumber=data.TelNumber;
+            response.CourseId=data.CourseId;
+            response.Batch=data.Batch;
+            response.Date=data.Date;
+            response.MobileNo=data.MobileNo;
+            response.Email=data.Email;
+            response.Address=data.Address;
+            response.RegFee=data.RegFee;
+            response.AdditionalFee=data.AdditionalFee;
             return response;
 
         }
-        public async Task<StudentResponse>DeleteStudentById(Guid StudentId)
+        public async Task<StudentResponse>DeleteStudentById(string NicNo)
         {
-            var data=await _istudentRepository.DeleteStudentById(StudentId);
+            var data=await _istudentRepository.DeleteStudentById(NicNo);
             var response=new StudentResponse();
-            response.StudentId = data.StudentId;
+            response.NicNo = data.NicNo;
             response.FirstName=data.FirstName;
             response.LastName=data.LastName;
-            response.BOD=data.BOD;
-            response.NicNumber = data.NicNumber;
-            response.Age=data.Age;
-            response.Gender=data.Gender;
-            response.TelNumber=data.TelNumber;
+            response.CourseId=data.CourseId;
+            response.Batch=data.Batch;
+            response.Date=data.Date;
+            response.MobileNo=data.MobileNo;
+            response.Email=data.Email;
+            response.Address=data.Address;
+            response.RegFee=data.RegFee;
+            response.AdditionalFee=data.AdditionalFee;
             return response;
         }
-        public async Task<StudentResponse>UpdateStudent(Guid StudentId, StudentRequest studentRequest)
+        public async Task<StudentResponse>UpdateStudent(string NicNo, StudentRequest studentRequest)
         {
-            var data=await _istudentRepository.FindStudentById(StudentId);
+            var data=await _istudentRepository.FindStudentById(NicNo);
             if (data==null)
             {
                 return null;
             }
+            data.NicNo=studentRequest.NicNo;
             data.FirstName=studentRequest.FirstName;
             data.LastName=studentRequest.LastName;
-            data.BOD=studentRequest.BOD;
-            data.NicNumber=studentRequest.NicNumber;
-            data.Age=studentRequest.Age;
-            data.Gender=studentRequest.Gender;
-            data.TelNumber=studentRequest.TelNumber;
+            data.CourseId=studentRequest.CourseId;
+            data.Batch=studentRequest.Batch;
+            data.Date=studentRequest.Date;
+            data.MobileNo=studentRequest.MobileNo;
+            data.Email=studentRequest.Email;
+            data.Address=studentRequest.Address;
+            data.RegFee=studentRequest.RegFee;
+            data.AdditionalFee=studentRequest.AdditionalFee;
 
             var updatedStudent=await _istudentRepository.UpdateStudent(data);
             if (updatedStudent==null)
@@ -109,14 +129,18 @@ namespace a_zApi.Services
 
             var response = new StudentResponse
             {
-                StudentId = updatedStudent.StudentId,
+                NicNo=updatedStudent.NicNo,
                 FirstName=updatedStudent.FirstName,
                 LastName=updatedStudent.LastName,
-                BOD=updatedStudent.BOD,
-                NicNumber=updatedStudent.NicNumber,
-                Age=updatedStudent.Age,
-                Gender=updatedStudent.Gender,
-                TelNumber=updatedStudent.TelNumber,
+                CourseId=updatedStudent.CourseId,
+                Batch=updatedStudent.Batch,
+                Date=updatedStudent.Date,
+                MobileNo=updatedStudent.MobileNo,
+                Email=updatedStudent.Email,
+                Address=updatedStudent.Address,
+                RegFee=updatedStudent.RegFee,
+                AdditionalFee=updatedStudent.AdditionalFee,
+
             };
             return response;
         }
