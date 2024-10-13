@@ -597,25 +597,36 @@ addCourseCancel.onclick = function(){
 // Add Course Function
 document.getElementById("addCourseForm").addEventListener('submit', async function(event){
     event.preventDefault();
-    let courseList = await getCourses();
+    // let courseList = await getCourses();
     let addCourseId = document.getElementById("addCourseId").value;
 
-    if(await courseList.find(e => e.id === addCourseId)){
-        alert("The course ID is already exists");
-    }else{
+    // if(await courseList.find(e => e.id === addCourseId)){
+    //     alert("The course ID is already exists");
+    // }else{
 
     let addCourseName = document.getElementById("addCourseName").value;
+    let addFile = document.getElementById("addFile").files[0];
     let addCourseDuration = document.getElementById("addCourseDuration").value;
     let addCourseFee = document.getElementById("addCourseFee").value;
     let addCourseInstructor = document.getElementById("addCourseInstructor").value;
     let addCourseSyllabus = document.getElementById("addCourseSyllabus").value;
+    
+    const courseDetails = new FormData();
+    courseDetails.append('CourseId',addCourseId);
+    courseDetails.append('CourseName',addCourseName);
+    courseDetails.append('CourseImage',addFile);
+    courseDetails.append('Duration',addCourseDuration);
+    courseDetails.append('Fee',addCourseFee);
+    courseDetails.append('Instructor',addCourseInstructor);
+    courseDetails.append('Syllabus',addCourseSyllabus);
 
-    let courseObj = {courseId:addCourseId, courseName:addCourseName, courseDuration:addCourseDuration, courseFee:addCourseFee, courseInstructor:addCourseInstructor, courseSyllabus:addCourseSyllabus};
 
-    await addNewCourse(courseObj);
+    // let courseObj = {courseId:addCourseId, courseName:addCourseName, courseDuration:addCourseDuration, courseFee:addCourseFee, courseInstructor:addCourseInstructor, courseSyllabus:addCourseSyllabus};
+
+    await addNewCourse(courseDetails);
     event.target.reset();
     alert("Successfully added");
-    }
+    // }
 });
 
 

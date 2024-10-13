@@ -11,13 +11,14 @@ namespace a_zApi.Repository
         {
             _connectionString = connectionString;
         }
-        public async Task<Course>CreateCourse(Course course)
+        public async Task CreateCourse(Course course)
         {
             using(var connection=new SqlConnection(_connectionString))
             {
-                var command = new SqlCommand("INSERT INTO Course(CourseId,CourseName,Duration,Fee,Instructor,Syllabus)VALUES(@CourseId,@CourseName,@Duration,@Fee,@Instructor,@Syllabus)", connection);
+                var command = new SqlCommand("INSERT INTO Courses (CourseId,CourseName,CourseImage,Duration,Fee,Instructor,Syllabus)VALUES(@CourseId,@CourseName,@courseImage,@Duration,@Fee,@Instructor,@Syllabus)", connection);
                 command.Parameters.AddWithValue("@CourseId", course.CourseId);
                 command.Parameters.AddWithValue("@CourseName", course.CourseName);
+                command.Parameters.AddWithValue("@courseImage", course.CourseImage);
                 command.Parameters.AddWithValue("@Duration", course.Duration);
                 command.Parameters.AddWithValue("@Fee", course.Fee);
                 command.Parameters.AddWithValue("@Instructor", course.Instructor);
@@ -27,7 +28,6 @@ namespace a_zApi.Repository
                 await command.ExecuteNonQueryAsync();
 
             }
-            return course;
         }
         public async Task<List<Course>>GetAllCourse()
         {
@@ -46,7 +46,7 @@ namespace a_zApi.Repository
                             CourseId = reader.GetString(0),
                             CourseName = reader.GetString(1),
                             Duration = reader.GetString(2),
-                            Fee = reader.GetDecimal(3),
+                            Fee = reader.GetInt32(3),
                             Instructor = reader.GetString(4),
                             Syllabus = reader.GetString(5)
 
@@ -74,7 +74,7 @@ namespace a_zApi.Repository
                             CourseId = reader.GetString(0),
                             CourseName = reader.GetString(1),
                             Duration = reader.GetString(2),
-                            Fee = reader.GetDecimal(3),
+                            Fee = reader.GetInt32(3),
                             Instructor = reader.GetString(4),
                             Syllabus = reader.GetString(5)
                         };
@@ -102,7 +102,7 @@ namespace a_zApi.Repository
                             CourseId = reader.GetString(0),
                             CourseName = reader.GetString(1),
                             Duration = reader.GetString(2),
-                            Fee = reader.GetDecimal(3),
+                            Fee = reader.GetInt32(3),
                             Instructor = reader.GetString(4),
                             Syllabus = reader.GetString(5)
                         };
@@ -137,7 +137,7 @@ namespace a_zApi.Repository
                             CourseId = reader.GetString(0),
                             CourseName = reader.GetString(1),
                             Duration = reader.GetString(2),
-                            Fee = reader.GetDecimal(3),
+                            Fee = reader.GetInt32(3),
                             Instructor = reader.GetString(4),
                             Syllabus = reader.GetString(5)
                         };
