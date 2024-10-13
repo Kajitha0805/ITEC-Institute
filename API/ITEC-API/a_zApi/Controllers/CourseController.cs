@@ -17,8 +17,9 @@ namespace a_zApi.Controllers
         [HttpPost("Create_Course")]
         public async Task<IActionResult>CreateCourse(CourseRequest courseRequest)
         {
-            var data=await _icourseService.CreateCourse(courseRequest);
-            return Ok(data);
+           
+            await _icourseService.CreateCourse(courseRequest);
+            return Ok();
         }
         [HttpGet("Get_All_Course")]
         public async Task<IActionResult>GetAllCourses()

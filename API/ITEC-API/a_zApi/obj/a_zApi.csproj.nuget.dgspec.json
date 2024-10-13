@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "X:\\My practices\\ITEC-Institute\\API\\ITEC-API\\a_zApi\\a_zApi.csproj": {}
+    "C:\\Users\\Computer Corner\\Desktop\\2nd_Milestone\\ITEC-Institute\\API\\ITEC-API\\a_zApi\\a_zApi.csproj": {}
   },
   "projects": {
-    "X:\\My practices\\ITEC-Institute\\API\\ITEC-API\\a_zApi\\a_zApi.csproj": {
+    "C:\\Users\\Computer Corner\\Desktop\\2nd_Milestone\\ITEC-Institute\\API\\ITEC-API\\a_zApi\\a_zApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "X:\\My practices\\ITEC-Institute\\API\\ITEC-API\\a_zApi\\a_zApi.csproj",
+        "projectUniqueName": "C:\\Users\\Computer Corner\\Desktop\\2nd_Milestone\\ITEC-Institute\\API\\ITEC-API\\a_zApi\\a_zApi.csproj",
         "projectName": "a_zApi",
-        "projectPath": "X:\\My practices\\ITEC-Institute\\API\\ITEC-API\\a_zApi\\a_zApi.csproj",
-        "packagesPath": "C:\\Users\\ut01222\\.nuget\\packages\\",
-        "outputPath": "X:\\My practices\\ITEC-Institute\\API\\ITEC-API\\a_zApi\\obj\\",
+        "projectPath": "C:\\Users\\Computer Corner\\Desktop\\2nd_Milestone\\ITEC-Institute\\API\\ITEC-API\\a_zApi\\a_zApi.csproj",
+        "packagesPath": "C:\\Users\\Computer Corner\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Computer Corner\\Desktop\\2nd_Milestone\\ITEC-Institute\\API\\ITEC-API\\a_zApi\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\ut01222\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Computer Corner\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,7 +22,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -35,21 +34,12 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
         }
       },
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
-            "Microsoft.AspNetCore.Cors": {
-              "target": "Package",
-              "version": "[2.2.0, )"
-            },
             "Microsoft.Data.SqlClient": {
               "target": "Package",
               "version": "[5.2.2, )"
@@ -78,7 +68,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

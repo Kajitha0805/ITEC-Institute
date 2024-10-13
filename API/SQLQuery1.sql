@@ -1,3 +1,5 @@
+create database ITECH_DB;
+
 use ITECH_DB;
 
 create table Student(
@@ -18,3 +20,13 @@ AdditionalFee decimal(20,2)not null,
 select * from Course
 
 select * from Student
+
+create table Courses(
+CourseId nvarchar (10) primary key,
+CourseName nvarchar (20),
+CourseImage varbinary (max),
+Duration nvarchar (20),
+Fee int,
+Instructor nvarchar (20),
+Syllabus nvarchar (max)
+);

@@ -51,11 +51,10 @@ export async function removeSingleStudent(nicNo) {
   });
 }
 
-export async function addNewCourse(obj){
+export async function addNewCourse(courseDetails){
   await fetch('http://localhost:5064/api/Course/Create_Course',{
     method:'POST',
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({"CourseId":obj.courseId, "CourseName":obj.courseName, "Duration":obj.courseDuration, "Fee":obj.courseFee, "instructor":obj.courseInstructor, "Syllabus":obj.courseSyllabus})
+    body: courseDetails
   })
 }
 

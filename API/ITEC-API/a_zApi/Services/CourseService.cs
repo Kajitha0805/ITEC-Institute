@@ -13,27 +13,25 @@ namespace a_zApi.Services
         {
             _icourseRepository = icourseRepository;
         }
-        public async Task<CourseResponse>CreateCourse(CourseRequest courseRequest)
+        public async Task CreateCourse(CourseRequest courseRequest)
         {
             var inputCourse = new Course();
             inputCourse.CourseId = courseRequest.CourseId;
             inputCourse.CourseName = courseRequest.CourseName;
-            inputCourse.Duration = courseRequest.Duration;
+            if (courseRequest.CourseImage != null)
+            {
+                using (var memoryStream = new MemoryStream())
+                {
+                    await courseRequest.CourseImage.CopyToAsync(memoryStream);
+                    inputCourse.CourseImage = memoryStream.ToArray();
+                }
+        }
+        inputCourse.Duration = courseRequest.Duration;
             inputCourse.Fee = courseRequest.Fee;
             inputCourse.Instructor = courseRequest.Instructor;
             inputCourse.Syllabus = courseRequest.Syllabus;
 
-            var addedCourses=await _icourseRepository.CreateCourse(inputCourse);
-
-            var response=new CourseResponse();
-            response.CourseId = addedCourses.CourseId;
-            response.CourseName = addedCourses.CourseName;
-            response.Duration =addedCourses.Duration;
-            response.Fee=addedCourses.Fee;
-            response.Instructor =addedCourses.Instructor;
-            response.Syllabus =addedCourses.Syllabus;
-
-            return response;
+            await _icourseRepository.CreateCourse(inputCourse);
 
         }
         public async Task<List<CourseResponse>>GetAllCourses()

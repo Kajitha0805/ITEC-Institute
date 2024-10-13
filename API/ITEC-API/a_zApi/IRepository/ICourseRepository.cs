@@ -4,7 +4,7 @@ namespace a_zApi.IRepository
 {
     public interface ICourseRepository
     {
-        Task<Course> CreateCourse(Course course);
+        Task CreateCourse(Course course);
         Task<List<Course>> GetAllCourse();
         Task<Course> GetCourseById(string CourseId);
         Task<Course> DeleteCourseById(string CourseId);
