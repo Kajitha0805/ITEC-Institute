@@ -61,7 +61,6 @@ export async function addNewCourse(courseDetails){
 export async function getCourses() {
   const response = await fetch('http://localhost:5064/api/Course/Get_All_Course');
   const data = await response.json();
-  console.log(data)
   return data;
 }
 
