@@ -30,3 +30,4 @@ Fee int,
 Instructor nvarchar (20),
 Syllabus nvarchar (max)
 );
+

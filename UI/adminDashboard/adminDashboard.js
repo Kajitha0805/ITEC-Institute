@@ -1,4 +1,4 @@
-import {addStudents, updateStudent, removeSingleStudent, addNewCourse, getCourses, addNewStudent, courseUpdate, deleteSingleCourse, getStudents, addPayment, getPayment, addModule, getAllModules, addExpense, changeRegFee, getRegFee, addBatch, getBatch, getExpense} from '../api.js';
+import {addStudents, updateStudent, removeSingleStudent, addNewCourse, getSingleCourse, getCourses, addNewStudent, courseUpdate, deleteSingleCourse, getStudents, addPayment, getPayment, addModule, getAllModules, addExpense, changeRegFee, getRegFee, addBatch, getBatch, getExpense} from '../api.js';
 
 
 
@@ -663,19 +663,21 @@ document.getElementById("editcourseModalClose").onclick = function(){
 // Edit Course Modal Search Button
 document.getElementById("courseSearch").onclick = async function(){
     let searchCourseId = document.getElementById("searchCourseId").value;
-    const courseList = await getCourses();
+    const singleCourse = await getSingleCourse(searchCourseId);
+    
 
-    if(await courseList.find(e => e.courseId === searchCourseId)){
+    if(singleCourse != null){
         courseError.innerText = "";
-    let e = await courseList.find(e => e.courseId === searchCourseId);
+    
     let editCourseDynamic = document.getElementById("editCourseDynamic");
     editCourseDynamic.style.display = "block";
-    document.getElementById("editCourseId").value = e.courseId;
-    document.getElementById("editCourseName").value = e.courseName;
-    document.getElementById("editDuration").value = e.duration;
-    document.getElementById("editFee").value = e.fee;
-    document.getElementById("editInstructor").value = e.instructor;
-    document.getElementById("editSyllabus").value = e.syllabus;
+    document.getElementById("editCourseId").value = singleCourse.courseId;
+    document.getElementById("editCourseName").value = singleCourse.courseName;
+    document.getElementById("oldImage").innerHTML = `<img src="data:image/jpg;base64,${singleCourse.courseImage}" height="30px">`;
+    document.getElementById("editDuration").value = singleCourse.duration;
+    document.getElementById("editFee").value = singleCourse.fee;
+    document.getElementById("editInstructor").value = singleCourse.instructor;
+    document.getElementById("editSyllabus").value = singleCourse.syllabus;
     }
     else{
         editCourseDynamic.style.display = "none";
@@ -693,6 +695,7 @@ document.getElementById("courseSearch").onclick = async function(){
 // Edit Course Modal Edit Button
 document.getElementById("courseEditBtn").onclick = function(){
     editCourseName.disabled = false;
+    editImage.disabled = false;
     editDuration.disabled = false;
     editFee.disabled = false;
     editInstructor.disabled = false;
@@ -707,17 +710,27 @@ document.getElementById("editCourseDynamic").addEventListener('submit', async fu
     let searchCourseId = document.getElementById("searchCourseId").value;
 
     let editCourseName = document.getElementById("editCourseName").value;
+    let editImage = document.getElementById("editImage").files[0];
     let editDuration = document.getElementById("editDuration").value
     let editFee = document.getElementById("editFee").value;
     let editInstructor = document.getElementById("editInstructor").value;
     let editSyllabus = document.getElementById("editSyllabus").value;
 
-    const editCourseObj = {eCourseName:editCourseName, eDuration:editDuration, eFee:editFee, eInstructor:editInstructor, eSyllabus:editSyllabus}
+    let updateCourse = new FormData();
+    updateCourse.append('CourseName', editCourseName);
+    updateCourse.append('CourseImage', editImage);
+    updateCourse.append('Duration', editDuration);
+    updateCourse.append('Fee', editFee);
+    updateCourse.append('Instructor', editInstructor);
+    updateCourse.append('Syllabus', editSyllabus);
 
-    await courseUpdate(searchCourseId, editCourseObj);
-    event.target.reset();
-
+    await courseUpdate(searchCourseId, updateCourse);
+    
+    
     alert("Successfully updated");
+    document.getElementById("searchCourseId").value = "";
+    document.getElementById("oldImage").innerHTML = ``;
+    event.target.reset();
 });
 
 
@@ -752,16 +765,14 @@ document.getElementById("removeCourseClose").onclick = function(){
 let removeCourseSearch = document.getElementById("removeCourseSearch");
 removeCourseSearch.onclick = async function(){
     let courseSearchId = document.getElementById("courseSearchId").value;
-    let courseList = await getCourses();
+    var singleCourse = await getSingleCourse(courseSearchId);
 
-    if(await courseList.find(e => e.courseId === courseSearchId)){
+    if(singleCourse != null){
         removeCourseError.innerText = "";
-        let e = await courseList.find(e => e.courseId === courseSearchId);
-
-    document.getElementById("removeCourseDynamic").style.display = "flex";
-    document.getElementById("cId").innerText = e.courseId;
-    document.getElementById("cName").innerText = e.courseName;
-    document.getElementById("cInstructor").innerText = e.instructor; 
+        document.getElementById("removeCourseDynamic").style.display = "flex";
+        document.getElementById("cId").innerText = singleCourse.courseId;
+        document.getElementById("cName").innerText = singleCourse.courseName;
+        document.getElementById("cInstructor").innerText = singleCourse.instructor; 
     }else{
         document.getElementById("removeCourseDynamic").style.display = "none";
         let removeCourseError = document.getElementById("removeCourseError");
@@ -1049,8 +1060,8 @@ let reversedallCourses = allCourses.reverse();
 
 await reversedallCourses.forEach(e => {
     let courseOption = document.createElement('option');
-    courseOption.value = e.coursename;
-    courseOption.text = e.coursename;
+    courseOption.value = e.courseName;
+    courseOption.text = e.courseName;
     courseList.appendChild(courseOption);
 })
 
@@ -1256,8 +1267,8 @@ let imCourseList = document.getElementById("imCourseList");
 
 reversedImCourses.forEach(e => {
     let imCourseOption = document.createElement('option');
-    imCourseOption.value = e.coursename;
-    imCourseOption.text = e.coursename;
+    imCourseOption.value = e.courseName;
+    imCourseOption.text = e.courseName;
     imCourseList.appendChild(imCourseOption);
     
 })

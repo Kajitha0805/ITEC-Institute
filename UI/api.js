@@ -73,7 +73,7 @@ export async function addNewStudent(obj){
 }
 
 
-export async function getSingleCourse(id) {
+export async function getSingleCourse(courseId) {
   const response = await fetch(`http://localhost:5064/api/Course/Get_Course_By_Id?CourseId=${courseId}`);
   const data = await response.json();
   return data;
@@ -81,12 +81,9 @@ export async function getSingleCourse(id) {
 
 
 export async function courseUpdate(courseId, obj) {
-  const updateData={courseName:obj.eCourseName, duration:obj.eDuration, fee:obj.eFee, instructor:obj.eInstructor, syllabus:obj.eSyllabus};
-  console.log(updateData)
   const response = await fetch(`http://localhost:5064/api/Course/Update_Course?CourseId=${courseId}`, {
     method: 'PATCH',
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify(updateData)
+    body: obj
   });
 }
 
