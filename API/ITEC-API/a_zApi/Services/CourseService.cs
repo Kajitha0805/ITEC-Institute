@@ -78,7 +78,7 @@ namespace a_zApi.Services
             return response;
 
         }
-        public async Task<CourseResponse>UpdateCourse(string CourseId, CourseRequest courseRequest)
+        public async Task<CourseResponse>UpdateCourse(string CourseId,CourseRequest courseRequest)
         {
             var data = await _icourseRepository.FindCourseById(CourseId);
             if (data==null)

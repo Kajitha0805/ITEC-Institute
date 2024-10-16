@@ -67,10 +67,10 @@ export async function getCourses() {
 }
 
 export async function addNewStudent(obj){
-  await fetch('http://localhost:5064/api/Student/Create_Student',{
+  await fetch(`http://localhost:5064/api/Student/Create_Student`,{
     method:'POST',
     headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({"id":obj.nicNo, "firstname":obj.firstName, "lastname":obj.lastName, "course":obj.courseId, "batch":obj.batch, "date":obj.date, "mobile":obj.mobileNo, "email":obj.email, "address":obj.address, "regfee":obj.regFee, "addifee":obj.additionalFee})
+    body: JSON.stringify({"nicNo":obj.nicNo, "firstName":obj.firstName, "lastName":obj.lastName, "courseId":obj.courseId, "batch":obj.batch, "date":obj.date, "mobileNo":obj.mobileNo, "email":obj.email, "address":obj.address, "regFee":obj.regFee, "additionalFee":obj.additionalFee})
   })
 }
 
@@ -81,7 +81,6 @@ export async function getSingleCourse(id) {
   return data;
 }
 
-
 export async function courseUpdate(courseId, obj) {
   const updateData={courseName:obj.eCourseName, duration:obj.eDuration, fee:obj.eFee, instructor:obj.eInstructor, syllabus:obj.eSyllabus};
   console.log(updateData)
@@ -89,7 +88,15 @@ export async function courseUpdate(courseId, obj) {
     method: 'PATCH',
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify(updateData)
-  });
+});
+
+if (!response.ok) {
+    const errorMessage = await response.text(); // or response.json() if the error is returned in JSON
+    console.error('Error updating course:', response.status, errorMessage);
+} else {
+    console.log('Course updated successfully:', await response.json());
+}
+
 }
 
 

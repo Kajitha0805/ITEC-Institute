@@ -373,12 +373,12 @@ reversedBatch.forEach(e => {
 // ......................................................................................
 // Register Add Button
 
-// let RegFee = await getRegFee();
-// let sRegFee = await RegFee.find(e => e.nicNo === "1");
-// let finalRegFee = sRegFee.regfee;
+let RegFee = await getRegFee();
+let sRegFee = await RegFee.find(e => e.id === "1");
+let finalRegFee = sRegFee.regfee;
 
-// let stuRegFee = document.getElementById("stuRegFee");
-// stuRegFee.value = finalRegFee;
+let stuRegFee = document.getElementById("stuRegFee");
+stuRegFee.value = finalRegFee;
 
 
 
@@ -696,7 +696,7 @@ document.getElementById("courseEditBtn").onclick = function(){
 document.getElementById("editCourseDynamic").addEventListener('submit', async function(event){
     event.preventDefault();
     let searchCourseId = document.getElementById("searchCourseId").value;
-
+    // let editCourseId=document.getElementById()
     let editCourseName = document.getElementById("editCourseName").value;
     let editDuration = document.getElementById("editDuration").value
     let editFee = document.getElementById("editFee").value;
