@@ -43,7 +43,6 @@ namespace a_zApi.Services
                 var courseResponse = new CourseResponse();
                 courseResponse.CourseId =course.CourseId;
                 courseResponse.CourseName=course.CourseName;
-                courseResponse.CourseImage = course.CourseImage;
                 courseResponse.Duration=course.Duration;
                 courseResponse.Fee=course.Fee;
                 courseResponse.Instructor =course.Instructor;

@@ -45,6 +45,8 @@ namespace a_zApi.Services
             return response;
         }
 
+        //01
+
         public async Task<List<StudentResponse>>GetAllStudent()
         {
             var data=await _istudentRepository.GetAllStudent();
@@ -67,6 +69,7 @@ namespace a_zApi.Services
             }
             return response;
         }
+        //02
         public async Task<StudentResponse>GetStudentById(string NicNo)
         {
             var data=await _istudentRepository.GetStudentById(NicNo);
@@ -85,6 +88,7 @@ namespace a_zApi.Services
             return response;
 
         }
+        //03
         public async Task<StudentResponse>DeleteStudentById(string NicNo)
         {
             var data=await _istudentRepository.DeleteStudentById(NicNo);

@@ -13,7 +13,6 @@ async function getAllCourses(){
 // Course Table
 // Creating table rows and table data using data from db.json/courses
     reversed.forEach(e => {
-
         let row = document.createElement('tr');
         row.style.backgroundColor = "#80C574"
 
@@ -29,17 +28,11 @@ async function getAllCourses(){
         coursenamecell.textContent = e.courseName;
         row.appendChild(coursenamecell);
 
-        let courseImageCell = document.createElement('td');
-        courseImageCell.style.padding = "20px";
-        courseImageCell.style.textAlign = "center";
-        courseImageCell.innerHTML = `<img src="data:image/jpg;base64,${e.courseImage}" height="80px">`;
-        row.appendChild(courseImageCell);
-
         let durationcell = document.createElement('td');
         durationcell.style.padding = "20px";
         durationcell.style.textAlign = "center";
         durationcell.textContent = e.duration;
-        row.appendChild(durationcell);        
+        row.appendChild(durationcell);
 
         let feescell = document.createElement('td');
         feescell.style.padding = "20px";
@@ -54,11 +47,10 @@ async function getAllCourses(){
         row.appendChild(instructorcell);
       
 
-        tbody.appendChild(row);      
+        tbody.appendChild(row);
 
     
 });
-
 }
 
 getAllCourses();
