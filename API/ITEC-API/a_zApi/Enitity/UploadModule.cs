@@ -1,20 +1,13 @@
 ﻿namespace a_zApi.Enitity
 {
-    public class FollowUp
+    public class UploadModule
     {
-        public string Name { get; set; }
-
-        public string Moblie { get; set; }
-
+        public string Title {  get; set; }
         public string CourseId { get; set; }
         public Course Course { get; set; }
-
+        public string Batch {  get; set; }
         public DateTime Date { get; set; }
-
-        public string Email {  get; set; }
-
-        public string Address { get; set; }
-
+        public byte[] Uplode { get; set; }
         public string Description {  get; set; }
     }
 }

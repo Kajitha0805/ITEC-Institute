@@ -28,3 +28,28 @@ AdditionalFee decimal(20,2)not null,
 select * from Course
 
 select * from Student
+
+create table FollowUp(
+Name nvarchar(50) not null,
+Moblie nvarchar(20) not null,
+CourseId nvarchar(50) ,
+foreign key(CourseId)references Course(CourseId),
+Date date not null,
+Email nvarchar(30)not null,
+Address nvarchar(50) not null,
+Description nvarchar(50)not null
+);
+
+select * from FollowUp
+
+create table UploadModule(
+Title nvarchar(50) not null,
+CourseId nvarchar(50) ,
+foreign key(CourseId)references Course(CourseId),
+Batch nvarchar(50) not null,
+Date date not null,
+Uplode varbinary (max),
+Description nvarchar(50) not null,
+
+);
+

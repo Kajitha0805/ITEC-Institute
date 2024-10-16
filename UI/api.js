@@ -14,16 +14,16 @@ export async function getAdmin() {
 }
 
 export async function addStudents(obj){
-  await fetch('http://localhost:3000/followup',{
+  await fetch('http://localhost:5064/api/FollowUp/Create_FollowUp',{
     method:'POST',
     headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({"name":obj.Name, "mobile":obj.Mobile, "course":obj.Course, "date":obj.Date, "email":obj.Email, "address":obj.Address, "description":obj.Description})
+    body: JSON.stringify({"name":obj.Name, "moblie":obj.Mobile, "courseId":obj.Course, "date":obj.Date, "email":obj.Email, "address":obj.Address, "description":obj.Description})
   })
   
 }
 
 
-// export async function getStudentById(id) {
+// export asy nc function getStudentById(id) {
 //   const response = await fetch(`http://localhost:3000/students/${id}`);
 //   const data = await response.json();
 //   return data;
@@ -124,10 +124,10 @@ export async function getPayment() {
 
 
 export async function addModule(obj){
-  await fetch('http://localhost:3000/modules',{
+  await fetch('http://localhost:5064/api/UpModule/Upload_Module',{
     method:'POST',
     headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({"title":obj.mModuleTitle, "course":obj.mCourseList, "batch":obj.mModulebatch, "date":obj.mModuleDate, "file":obj.mModuleFile, "description":obj.mModuleDescription})
+    body: JSON.stringify({"title":obj.mModuleTitle, "courseId":obj.mCourseList, "batch":obj.mModulebatch, "date":obj.mModuleDate, "upload":obj.mModuleFile, "description":obj.mModuleDescription})
   })
   
 }
@@ -181,8 +181,9 @@ export async function getBatch() {
 
 
 export async function getFollowup() {
-  const response = await fetch('http://localhost:3000/followup');
+  const response = await fetch('http://localhost:5064/api/FollowUp/Get_All_FollowUps');
   const data = await response.json();
+  console.log(data);
   return data;
 }
 

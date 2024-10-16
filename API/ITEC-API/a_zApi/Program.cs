@@ -16,6 +16,12 @@ builder.Services.AddScoped<IStudentService, StudentService>();
 builder.Services.AddSingleton<ICourseRepository>(provider => new CourseRepository(connectionString));
 builder.Services.AddScoped<ICourseService, CourseService>();
 
+builder.Services.AddSingleton<IFollowUpRepository>(provider => new FollowUpRepository(connectionString));
+builder.Services.AddScoped<IFollowUpService, FollowUpService>();
+
+builder.Services.AddSingleton<IUploadModuleRepository>(provider => new UploadModuleRepository(connectionString));
+builder.Services.AddScoped<IUpModuleService, UpModuleService>();
+
 
 
 

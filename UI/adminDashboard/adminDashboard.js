@@ -1070,7 +1070,7 @@ let moduleTitle = document.getElementById("moduleTitle").value;
 let courseList = document.getElementById("courseList").value;
 let moduleBatch = document.getElementById("moduleBatch").value;
 let moduleDate = document.getElementById("moduleDate").value;
-let moduleFile = document.getElementById("moduleFile").value;
+let moduleFile = document.getElementById("moduleFile").file[0];
 let ModuleDescription = document.getElementById("ModuleDescription").value;
 
 let moduleObj = {mModuleTitle:moduleTitle, mCourseList:courseList, mModulebatch:moduleBatch, mModuleDate:moduleDate, mModuleFile:moduleFile, mModuleDescription:ModuleDescription};

@@ -123,6 +123,19 @@
       "address": "Batticaloa",
       "regfee": "1000.00",
       "addifee": "0.00"
+    },
+    {
+      "id": "4564",
+      "firstname": "fg",
+      "lastname": "fgf",
+      "course": "C#",
+      "batch": "V",
+      "date": "2024-10-17",
+      "mobile": "35",
+      "email": "tfd@gmail.com",
+      "address": "dfd",
+      "regfee": "1000.00",
+      "addifee": "0.00"
     }
   ],
   "courses": [
@@ -275,6 +288,11 @@
     },
     {
       "id": "20036291353",
+      "date": "2024-10-17",
+      "fee": "0.00"
+    },
+    {
+      "id": "4564",
       "date": "2024-10-17",
       "fee": "0.00"
     }
