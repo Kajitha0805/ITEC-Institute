@@ -1,6 +1,7 @@
 ﻿using a_zApi.Enitity;
 using a_zApi.IRepository;
 using Microsoft.Data.SqlClient;
+using System.Data;
 
 namespace a_zApi.Repository
 {
@@ -34,7 +35,7 @@ namespace a_zApi.Repository
             var courses = new List<Course>();
             using(var connection=new SqlConnection(_connectionString))
             {
-                var command = new SqlCommand("select * from Course", connection);
+                var command = new SqlCommand("select * from Courses", connection);
                 await connection.OpenAsync();
 
                 using(var reader=await command.ExecuteReaderAsync())
@@ -45,10 +46,11 @@ namespace a_zApi.Repository
                         {
                             CourseId = reader.GetString(0),
                             CourseName = reader.GetString(1),
-                            Duration = reader.GetString(2),
-                            Fee = reader.GetInt32(3),
-                            Instructor = reader.GetString(4),
-                            Syllabus = reader.GetString(5)
+                            CourseImage = reader["CourseImage"] as byte[],
+                            Duration = reader.GetString(3),
+                            Fee = reader.GetInt32(4),
+                            Instructor = reader.GetString(5),
+                            Syllabus = reader.GetString(6)
 
                         });
 

@@ -11,22 +11,15 @@
     />
   </head>
   <body>
-
     <div class="container">
       <!-- Top-Bar -->
       <div class="topBar" id="topBar">
         <div class="topBarLeft">
-          <span class="material-symbols-outlined" id="topBarMenu">
-            menu
-            </span>
-            <div class="stuName">
-              Ajith Sritharan
-            </div>
+          <span class="material-symbols-outlined" id="topBarMenu"> menu </span>
+          <div class="stuName">Ajith Sritharan</div>
         </div>
         <div class="notification">
-          <span class="material-symbols-outlined">
-            notifications
-            </span>
+          <span class="material-symbols-outlined"> notifications </span>
         </div>
       </div>
       <div class="underTopBar">
@@ -36,61 +29,70 @@
           </div>
           <div class="tabs">
             <ul>
-              <li><a href="#" class="menuItem"><span class="material-symbols-outlined tabIcon">
-                account_circle
-                </span><span class="tabLink">My Profile</span></a></li>
-              <li><a href="#" class="menuItem"><span class="material-symbols-outlined tabIcon">
-                library_books
-                </span>Courses</a></li>
-              <li><a href="#" class="menuItem"><span class="material-symbols-outlined tabIcon">
-                credit_card
-                </span>Payments</a></li>
-              <li><a href="#" class="menuItem"><span class="material-symbols-outlined tabIcon">
-                menu_book
-                </span>Study Materials</a></li>
+              <li>
+                <a href="#" class="menuItem">
+                  <span class="material-symbols-outlined tabIcon">account_circle</span>
+                    <span class="default" id="profileTab">My Profile</span>
+                </a>
+              </li>
+              <li>
+                <a class="menuItem">
+                  <span class="material-symbols-outlined tabIcon">library_books</span>
+                  <span id="courseTab">Courses</span>
+                  </a>
+              </li>
+              <li>
+                <a href="#" class="menuItem"><span class="material-symbols-outlined tabIcon">credit_card</span>Payments</a>
+              </li>
+              <li>
+                <a href="#" class="menuItem"
+                  ><span class="material-symbols-outlined tabIcon">
+                    menu_book </span
+                  >Study Materials</a
+                >
+              </li>
             </ul>
           </div>
         </div>
         <div class="mainBody" id="mainBody">
-            <div class="myProfile">
-              <div class="dpContainer">
-                <div class="dpCircle">
-                  <button class="dpUpload">+</button>
-                </div>
-              </div>
-              <form class="detailsContainer">
-                  <div class="left">
-                  <label for="">N.I.C No : </label>
-                  <input type="text" disabled>
-                  <label for="">First Name : </label>
-                  <input type="text" disabled>
-                  <label for="">Last Name : </label>
-                  <input type="text" disabled>
-                </div>
-                <div class="right">
-                  <label for="">Mobile No : </label>
-                  <input type="text" disabled>
-                  <label for="">Email Id : </label>
-                  <input type="text" disabled>
-                  <label for="">Address : </label>
-                  <input type="text" disabled>
-                </div>
-                <div class="editBtn"><span class="material-symbols-outlined">
-                  edit
-                  </span>
-                </div>
-                <button class="saveBtn">Save</button>
-              </form>
-
-              <div class="studentInfo">
-                <div class="followCourses">
-
-                </div>
-                <div class="paymentLog">
-
-                </div>
+          <div class="myProfileDiv" id="myProfileDiv">
+            <div class="dpContainer">
+              <div class="dpCircle">
+                <button class="dpUpload">+</button>
               </div>
             </div>
+            <form class="detailsContainer">
+              <div class="left">
+                <label for="">N.I.C No : </label>
+                <input type="text" disabled />
+                <label for="">First Name : </label>
+                <input type="text" disabled />
+                <label for="">Last Name : </label>
+                <input type="text" disabled />
+              </div>
+              <div class="right">
+                <label for="">Mobile No : </label>
+                <input type="text" disabled />
+                <label for="">Email Id : </label>
+                <input type="text" disabled />
+                <label for="">Address : </label>
+                <input type="text" disabled />
+              </div>
+              <div class="editBtn">
+                <span class="material-symbols-outlined"> edit </span>
+              </div>
+              <button class="saveBtn">Save</button>
+            </form>
+
+            <div class="studentInfo">
+              <div class="followCourses"></div>
+              <div class="paymentLog"></div>
+            </div>
+          </div>
+
+          <div class="showCourseDiv" id="showCourseDiv">
+
+          </div>
         </div>
       </div>
     </div>
