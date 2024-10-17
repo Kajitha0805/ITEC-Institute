@@ -5,10 +5,10 @@ namespace a_zApi.IServices
 {
     public interface ICourseService
     {
-        Task<CourseResponse> CreateCourse(CourseRequest courseRequest);
+        Task CreateCourse(CourseRequest courseRequest);
         Task<List<CourseResponse>> GetAllCourses();
         Task<CourseResponse> GetCourseById(string CourseId);
-        Task<CourseResponse> DeleteCourseById(string CourseId);
-        Task<CourseResponse> UpdateCourse(string CourseId, CourseRequest courseRequest);
+        Task DeleteCourseById(string CourseId);
+        Task UpdateCourse(string CourseId, CourseRequest courseRequest);
     }
 }

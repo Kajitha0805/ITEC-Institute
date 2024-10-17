@@ -14,35 +14,46 @@ namespace a_zApi.Controllers
         {
             _icourseService= icourseService;
         }
+
+
         [HttpPost("Create_Course")]
-        public async Task<IActionResult>CreateCourse(CourseRequest courseRequest)
+        public async Task<IActionResult> CreateCourse(CourseRequest courseRequest)
         {
-            var data=await _icourseService.CreateCourse(courseRequest);
-            return Ok(data);
+           
+            await _icourseService.CreateCourse(courseRequest);
+            return Ok();
         }
+
+
         [HttpGet("Get_All_Course")]
-        public async Task<IActionResult>GetAllCourses()
+        public async Task<IActionResult> GetAllCourses()
         {
             var data=await _icourseService.GetAllCourses();
             return Ok(data);
         }
+
+
         [HttpGet("Get_Course_By_Id")]
-        public async Task<IActionResult>GetCourseById(string CourseId)
+        public async Task<IActionResult> GetCourseById(string CourseId)
         {
-            var data=await _icourseService.GetCourseById(CourseId);
+            var data = await _icourseService.GetCourseById(CourseId);
             return Ok(data);
         }
+
+
         [HttpDelete("Delete_Course_By_Id")]
-        public async Task<IActionResult>DeleteCourseById(string CourseId)
+        public async Task<IActionResult> DeleteCourseById(string CourseId)
         {
-            var data=await _icourseService.DeleteCourseById(CourseId);
-            return Ok(data);
+            await _icourseService.DeleteCourseById(CourseId);
+            return Ok();
         }
+
+
         [HttpPatch("Update_Course")]
-        public async Task<IActionResult>UpdateCourse(string CourseId,CourseRequest courseRequest)
+        public async Task<IActionResult> UpdateCourse(string CourseId, CourseRequest courseRequest)
         {
-            var data=await _icourseService.UpdateCourse(CourseId, courseRequest);
-            return Ok(data);
+            await _icourseService.UpdateCourse(CourseId, courseRequest);
+            return Ok();
         }
     }
     

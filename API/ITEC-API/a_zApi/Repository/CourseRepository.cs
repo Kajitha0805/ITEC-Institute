@@ -1,6 +1,7 @@
 ﻿using a_zApi.Enitity;
 using a_zApi.IRepository;
 using Microsoft.Data.SqlClient;
+using System.Data;
 
 namespace a_zApi.Repository
 {
@@ -11,13 +12,14 @@ namespace a_zApi.Repository
         {
             _connectionString = connectionString;
         }
-        public async Task<Course>CreateCourse(Course course)
+        public async Task CreateCourse(Course course)
         {
             using(var connection=new SqlConnection(_connectionString))
             {
-                var command = new SqlCommand("INSERT INTO Course(CourseId,CourseName,Duration,Fee,Instructor,Syllabus)VALUES(@CourseId,@CourseName,@Duration,@Fee,@Instructor,@Syllabus)", connection);
+                var command = new SqlCommand("INSERT INTO Courses (CourseId,CourseName,CourseImage,Duration,Fee,Instructor,Syllabus)VALUES(@CourseId,@CourseName,@courseImage,@Duration,@Fee,@Instructor,@Syllabus)", connection);
                 command.Parameters.AddWithValue("@CourseId", course.CourseId);
                 command.Parameters.AddWithValue("@CourseName", course.CourseName);
+                command.Parameters.AddWithValue("@courseImage", course.CourseImage);
                 command.Parameters.AddWithValue("@Duration", course.Duration);
                 command.Parameters.AddWithValue("@Fee", course.Fee);
                 command.Parameters.AddWithValue("@Instructor", course.Instructor);
@@ -27,14 +29,13 @@ namespace a_zApi.Repository
                 await command.ExecuteNonQueryAsync();
 
             }
-            return course;
         }
         public async Task<List<Course>>GetAllCourse()
         {
             var courses = new List<Course>();
             using(var connection=new SqlConnection(_connectionString))
             {
-                var command = new SqlCommand("select * from Course", connection);
+                var command = new SqlCommand("select * from Courses", connection);
                 await connection.OpenAsync();
 
                 using(var reader=await command.ExecuteReaderAsync())
@@ -45,10 +46,11 @@ namespace a_zApi.Repository
                         {
                             CourseId = reader.GetString(0),
                             CourseName = reader.GetString(1),
-                            Duration = reader.GetString(2),
-                            Fee = reader.GetDecimal(3),
-                            Instructor = reader.GetString(4),
-                            Syllabus = reader.GetString(5)
+                            CourseImage = reader["CourseImage"] as byte[],
+                            Duration = reader.GetString(3),
+                            Fee = reader.GetInt32(4),
+                            Instructor = reader.GetString(5),
+                            Syllabus = reader.GetString(6)
 
                         });
 
@@ -62,8 +64,9 @@ namespace a_zApi.Repository
             Course course=null;
             using(var connection=new SqlConnection(_connectionString))
             {
-                var command = new SqlCommand("SELECT * FROM Course WHERE CourseId=@CourseId", connection);
+                var command = new SqlCommand("SELECT * FROM Courses WHERE CourseId=@CourseId", connection);
                 command.Parameters.AddWithValue("@CourseId", CourseId);
+
                 await connection.OpenAsync();
                 using(var reader= await command.ExecuteReaderAsync())
                 {
@@ -73,10 +76,11 @@ namespace a_zApi.Repository
                         {
                             CourseId = reader.GetString(0),
                             CourseName = reader.GetString(1),
-                            Duration = reader.GetString(2),
-                            Fee = reader.GetDecimal(3),
-                            Instructor = reader.GetString(4),
-                            Syllabus = reader.GetString(5)
+                            CourseImage = reader["CourseImage"] as byte[],
+                            Duration = reader.GetString(3),
+                            Fee = reader.GetInt32(4),
+                            Instructor = reader.GetString(5),
+                            Syllabus = reader.GetString(6)
                         };
 
 
@@ -85,76 +89,32 @@ namespace a_zApi.Repository
                 return course;
             }
         }
-        public async Task<Course> DeleteCourseById(string CourseId)
+        public async Task DeleteCourseById(string CourseId)
         {
-            Course course = null;
+            
             using (var connection = new SqlConnection(_connectionString))
             {
-                var command = new SqlCommand("SELECT * FROM Course WHERE CourseId=@CourseId", connection);
-                command.Parameters.AddWithValue("@CourseId", CourseId);
                 await connection.OpenAsync();
-                using (var reader = await command.ExecuteReaderAsync())
-                {
-                    if (await reader.ReadAsync())
-                    {
-                        course = new Course
-                        {
-                            CourseId = reader.GetString(0),
-                            CourseName = reader.GetString(1),
-                            Duration = reader.GetString(2),
-                            Fee = reader.GetDecimal(3),
-                            Instructor = reader.GetString(4),
-                            Syllabus = reader.GetString(5)
-                        };
-
-                    }
-                }
-                if (course != null)
-                {
-                    var deleteCommand = new SqlCommand("DELETE FROM Course WHERE CourseId=@CourseId", connection);
+                
+                    var deleteCommand = new SqlCommand("DELETE FROM Courses WHERE CourseId=@CourseId", connection);
                     deleteCommand.Parameters.AddWithValue("@CourseId", CourseId);
                     await deleteCommand.ExecuteNonQueryAsync();
-                }
+                
 
             }
-            return course;
+          
         }
 
-        public async Task<Course> FindCourseById(string CourseId)
+        
+        public async Task UpdateCourse(string CourseId, Course course)
         {
-            Course course = null;
-            using (var connection = new SqlConnection(_connectionString))
-            {
-                var command = new SqlCommand("SELECT * FROM Course WHERE CourseId=@CourseId", connection);
-                command.Parameters.AddWithValue("@CourseId", CourseId);
-                await connection.OpenAsync();
-                using (var reader = await command.ExecuteReaderAsync())
-                {
-                    if (await reader.ReadAsync())
-                    {
-                        course = new Course
-                        {
-                            CourseId = reader.GetString(0),
-                            CourseName = reader.GetString(1),
-                            Duration = reader.GetString(2),
-                            Fee = reader.GetDecimal(3),
-                            Instructor = reader.GetString(4),
-                            Syllabus = reader.GetString(5)
-                        };
-
-                    }
-                }
-                return course;
-            }
-        }
-        public async Task<Course>UpdateCourse(Course course)
-        {
-            Course updateCourse= null;    
+            Course updateCourse = null;    
             using(var connection = new SqlConnection(_connectionString))
             {
-                var command = new SqlCommand("UPDATE Course SET CourseId = @CourseId, CourseName = @CourseName, Duration = @Duration,Fee=@Fee,Instructor=@Instructor,Syllabus=@Syllabus WHERE CourseId = @CourseId", connection);
-                command.Parameters.AddWithValue("@CourseId", course.CourseId);
+                var command = new SqlCommand("UPDATE Courses SET CourseName = @CourseName, CourseImage = @courseImage, Duration = @Duration,Fee=@Fee,Instructor=@Instructor,Syllabus=@Syllabus WHERE CourseId = @CourseId", connection);
+                command.Parameters.AddWithValue("@CourseId", CourseId);
                 command.Parameters.AddWithValue("@CourseName", course.CourseName);
+                command.Parameters.AddWithValue("@courseImage", course.CourseImage);
                 command.Parameters.AddWithValue("@Duration", course.Duration);
                 command.Parameters.AddWithValue("@Fee", course.Fee);
                 command.Parameters.AddWithValue("@Instructor", course.Instructor);
@@ -169,7 +129,7 @@ namespace a_zApi.Repository
                 }
 
             }
-            return updateCourse;
+            
            
         }
 

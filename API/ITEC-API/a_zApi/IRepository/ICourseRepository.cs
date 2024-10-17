@@ -4,11 +4,10 @@ namespace a_zApi.IRepository
 {
     public interface ICourseRepository
     {
-        Task<Course> CreateCourse(Course course);
+        Task CreateCourse(Course course);
         Task<List<Course>> GetAllCourse();
         Task<Course> GetCourseById(string CourseId);
-        Task<Course> DeleteCourseById(string CourseId);
-        Task<Course> FindCourseById(string CourseId);
-        Task<Course> UpdateCourse(Course course);
+        Task DeleteCourseById(string CourseId);
+        Task UpdateCourse(string CourseId, Course course);
     }
 }
