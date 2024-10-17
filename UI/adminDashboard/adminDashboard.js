@@ -1,4 +1,4 @@
-import {addStudents, updateStudent, removeSingleStudent, addNewCourse, getSingleCourse, getCourses, addNewStudent, courseUpdate, deleteSingleCourse, getStudents, addPayment, getPayment, addModule, getAllModules, addExpense, changeRegFee, getRegFee, addBatch, getBatch, getExpense} from '../api.js';
+import {addStudents, updateStudent, removeSingleStudent, addNewCourse, getSingleCourse, getCourses, addNewStudent, courseUpdate, deleteSingleCourse, getStudentById, getStudents, addPayment, getPayment, addModule, getAllModules, addExpense, changeRegFee, getRegFee, addBatch, getBatch, getExpense} from '../api.js';
 
 
 
@@ -384,32 +384,33 @@ reversedBatch.forEach(e => {
 
 document.getElementById("register").addEventListener('submit', async function(event){
     event.preventDefault();
-    let stuId = document.getElementById("stuId").value;
 
-    let allStudents = await getStudents();
+    let stuId = document.getElementById("stuId").value;
+    // var singleStudent = await getStudentById(stuId);
     
-    if(await allStudents.find(e => e.nicNo === stuId)){
-        alert("The Student ID is already exists");
+    // if(singleStudent != null){
+    //     alert("The Student ID is already exists");
     
-    }
-    else{
+    // }
+    // else{
         
     let stuFName = document.getElementById("stuFName").value;
     let stuLName = document.getElementById("stuLName").value;
-    let selectCourse = document.getElementById("selectCourse").value;
-    let stuBatch = document.getElementById("stuBatch").value;
     let stuDate = document.getElementById("stuDate").value;
     let stuMobile = document.getElementById("stuMobile").value;
     let stuEmail = document.getElementById("stuEmail").value;
     let stuAddress = document.getElementById("stuAddress").value;  
-    let stuAddiFee = document.getElementById("stuAddiFee").value;
+   
 
-    let studentObject = {nicNo:stuId, firstName:stuFName, lastName:stuLName, courseId:selectCourse, batch:stuBatch, date:stuDate, mobileNo:stuMobile, email:stuEmail, address:stuAddress, regFee:finalRegFee, additionalFee:stuAddiFee};
+    let studentObject = {nicNo:stuId, firstName:stuFName, lastName:stuLName, date:stuDate, mobileNo:stuMobile, email:stuEmail, address:stuAddress};
 
-    let paymentObject = {studentId:stuId, studentDate:stuDate, studentAddiFee:stuAddiFee};
     
-    await addPayment(paymentObject);
     await addNewStudent(studentObject);
+
+
+    // let selectCourse = document.getElementById("selectCourse").value;
+    // let stuBatch = document.getElementById("stuBatch").value;
+    // let stuAddiFee = document.getElementById("stuAddiFee").value;
 
     alert("Successfully added as new student");
 
@@ -417,7 +418,7 @@ document.getElementById("register").addEventListener('submit', async function(ev
     a.href = `mailto:${stuEmail}?subject=WelCome to ITEC&body=Hi ${stuFName}, Congratulations... %0A%0AYou just have registered in ITEC on ${stuDate} to follow the course ${selectCourse}. Please find the link below of our student portal. You can signup with your N.I.C No ${stuId} you used for your course registration. Thank you.%0A%0A%0A The Student portal link - https://www.itecstudentportal.com`;
     a.click();
     event.target.reset();
-    }
+    // }
 });
 
 // ........................................................
@@ -442,20 +443,19 @@ let search = document.getElementById("search");
 
 search.onclick = async function(){
     let id = document.getElementById("searchId").value;
-    const wholeStudents = await getStudents();
+    const singleStudent = await getStudentById(id);
 
-    if(await wholeStudents.find(e => e.id === id)){
-    let e = wholeStudents.find(e => e.id === id);
+    if(singleStudent != null){
     errMessage.textContent = "";
     document.getElementById("editDynamic").style.display = "block";
-    document.getElementById("seId").value = e.nicNo;
-    document.getElementById("seFname").value = e.firstName;
-    document.getElementById("seLname").value = e.lastName;
-    document.getElementById("seCourse").value = e.courseId;
-    document.getElementById("seBatch").value = e.batch;
-    document.getElementById("seMobile").value = e.mobileNo;
-    document.getElementById("seEmail").value = e.email;
-    document.getElementById("seAddress").value = e.address;
+    document.getElementById("seId").value = singleStudent.nicNo;
+    document.getElementById("seFname").value = singleStudent.firstName;
+    document.getElementById("seLname").value = singleStudent.lastName;
+    document.getElementById("seCourse").value = '';
+    document.getElementById("seBatch").value = '';
+    document.getElementById("seMobile").value = singleStudent.mobileNo;
+    document.getElementById("seEmail").value = singleStudent.email;
+    document.getElementById("seAddress").value = singleStudent.address;
     }
     else{
         let errMessage = document.getElementById("errMessage");
@@ -489,13 +489,11 @@ document.getElementById("editDynamic").addEventListener('submit', async function
     let putId = document.getElementById("searchId").value;
     let seFname = document.getElementById("seFname").value;
     let seLname = document.getElementById("seLname").value;
-    let seCourse = document.getElementById("seCourse").value;
-    let seBatch = document.getElementById("seBatch").value;
     let seMobile = document.getElementById("seMobile").value;
     let seEmail = document.getElementById("seEmail").value;
     let seAddress = document.getElementById("seAddress").value;
 
-    const putStudents = {Fname:seFname, Lname:seLname, Course:seCourse, Batch:seBatch, Mobile:seMobile, Email:seEmail, Address:seAddress};
+    const putStudents = {Fname:seFname, Lname:seLname, Mobile:seMobile, Email:seEmail, Address:seAddress};
 
     await updateStudent(putId, putStudents);
     event.target.reset();
@@ -534,15 +532,14 @@ let removeDynamic = document.getElementById("removeDynamic");
 
 document.getElementById("removeSearch").onclick = async function(){
     let removeSearchId = document.getElementById("removeSearchId").value;
-    let student = await getStudents();
+    const singleStudent = await getStudentById(removeSearchId);
 
-    if(student.find(e => e.nicNo === removeSearchId)){
-    let e = student.find(e => e.nicNo === removeSearchId);
+    if(singleStudent != null){
     removeError.textContent = "";
     removeDynamic.style.display = "flex";
-    document.getElementById("removeId").innerText = e.nicNo;
-    document.getElementById("removeName").innerText = e.firstName;
-    document.getElementById("removeBatch").innerText = e.batch;
+    document.getElementById("removeId").innerText = singleStudent.nicNo;
+    document.getElementById("removeName").innerText = singleStudent.firstName;
+    document.getElementById("removeBatch").innerText = '';
     }
     else{
         removeDynamic.style.display = "none";

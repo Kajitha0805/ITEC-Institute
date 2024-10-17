@@ -41,18 +41,18 @@ namespace a_zApi.Controllers
         }
 
 
-        [HttpDelete("Delete_Course_By_Id")]
-        public async Task<IActionResult> DeleteCourseById(string CourseId)
-        {
-            await _icourseService.DeleteCourseById(CourseId);
-            return Ok();
-        }
-
-
         [HttpPatch("Update_Course")]
         public async Task<IActionResult> UpdateCourse(string CourseId, CourseRequest courseRequest)
         {
             await _icourseService.UpdateCourse(CourseId, courseRequest);
+            return Ok();
+        }
+
+
+        [HttpDelete("Delete_Course_By_Id")]
+        public async Task<IActionResult> DeleteCourseById(string CourseId)
+        {
+            await _icourseService.DeleteCourseById(CourseId);
             return Ok();
         }
     }

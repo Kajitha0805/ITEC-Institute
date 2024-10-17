@@ -65,12 +65,7 @@ namespace a_zApi.Services
             response.Syllabus=data.Syllabus;
             return response;
         }
-        public async Task DeleteCourseById(string CourseId)
-        {
-            await _icourseRepository.DeleteCourseById(CourseId);
-            
-
-        }
+        
         public async Task UpdateCourse(string CourseId, CourseRequest courseRequest)
         {
             Course updateCourse = new Course();
@@ -91,6 +86,14 @@ namespace a_zApi.Services
 
             await _icourseRepository.UpdateCourse(CourseId, updateCourse);
         
+        }
+
+
+        public async Task DeleteCourseById(string CourseId)
+        {
+            await _icourseRepository.DeleteCourseById(CourseId);
+
+
         }
     }
 }

@@ -23,24 +23,23 @@ export async function addStudents(obj){
 }
 
 
-// export async function getStudentById(id) {
-//   const response = await fetch(`http://localhost:3000/students/${id}`);
-//   const data = await response.json();
-//   return data;
-// }
+export async function getStudentById(id) {
+  const response = await fetch(`http://localhost:5064/api/Student/Get_Student_By_Id?NicNo=${id}`);
+  const data = await response.json();
+  return data;
+}
 
-export async function updateStudent(putId, putStudents) {
-  const response = await fetch(`http://localhost:5064/api/Student/Update_Student?NicNo=${putId}`, {
+export async function updateStudent(putId, obj) {
+  await fetch(`http://localhost:5064/api/Student/Update_Student?NicNo=${putId}`, {
     method: 'PATCH',
     headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({firstName:putStudents.Fname, lastName:putStudents.Lname, courseId:putStudents.Course, batch:putStudents.Batch, mobileNo:putStudents.Mobile, email:putStudents.Email, address:putStudents.Address})
+    body: JSON.stringify({firstName:obj.Fname, lastName:obj.Lname, mobileNo:obj.Mobile, email:obj.Email, address:obj.Address})
   });
 }
 
 export async function getStudents() {
   const response = await fetch('http://localhost:5064/api/Student/Get_All_Student');
   const data = await response.json();
-  console.log(data);
   return data;
 }
 
@@ -68,7 +67,7 @@ export async function addNewStudent(obj){
   await fetch('http://localhost:5064/api/Student/Create_Student',{
     method:'POST',
     headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({"id":obj.nicNo, "firstname":obj.firstName, "lastname":obj.lastName, "course":obj.courseId, "batch":obj.batch, "date":obj.date, "mobile":obj.mobileNo, "email":obj.email, "address":obj.address, "regfee":obj.regFee, "addifee":obj.additionalFee})
+    body: JSON.stringify({nicNo:obj.nicNo, firstName:obj.firstName, lastName:obj.lastName, date:obj.date, mobileNo:obj.mobileNo, email:obj.email, address:obj.address})
   })
 }
 
@@ -81,7 +80,7 @@ export async function getSingleCourse(courseId) {
 
 
 export async function courseUpdate(courseId, obj) {
-  const response = await fetch(`http://localhost:5064/api/Course/Update_Course?CourseId=${courseId}`, {
+  await fetch(`http://localhost:5064/api/Course/Update_Course?CourseId=${courseId}`, {
     method: 'PATCH',
     body: obj
   });
