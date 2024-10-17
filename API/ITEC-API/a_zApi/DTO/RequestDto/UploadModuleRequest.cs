@@ -8,7 +8,7 @@ namespace a_zApi.DTO.RequestDto
         public string CourseId { get; set; }
         public string Batch { get; set; }
         public DateTime Date { get; set; }
-        public byte[] Uplode { get; set; }
+        public IFormFile Uplode { get; set; }
         public string Description { get; set; }
     }
 }

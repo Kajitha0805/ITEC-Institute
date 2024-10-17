@@ -53,3 +53,25 @@ Description nvarchar(50) not null,
 
 );
 
+create table Batch(
+BatchId uniqueidentifier primary key,
+BatchName nvarchar(50) not null
+);
+
+
+create table Batch(
+BatchName nvarchar(50) not null
+);
+
+create table Expense(
+Title nvarchar(50) not null,
+Date date not null,
+Price decimal not null,
+Receipt  varbinary (max),
+Description nvarchar(50) not null
+);
+
+select * from Expense
+
+select * from Batch
+

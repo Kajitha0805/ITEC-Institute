@@ -364,8 +364,8 @@ let allBatches = await getBatch();
 let reversedBatch = allBatches.reverse();
 reversedBatch.forEach(e => {
     let option = document.createElement('option');
-    option.value = e.batchname;
-    option.text = e.batchname;
+    option.value = e.batchName;
+    option.text = e.batchName;
     stuBatch.appendChild(option);
 })
 
@@ -1040,8 +1040,8 @@ let reversedallCourses = allCourses.reverse();
 
 await reversedallCourses.forEach(e => {
     let courseOption = document.createElement('option');
-    courseOption.value = e.coursename;
-    courseOption.text = e.coursename;
+    courseOption.value = e.courseId;
+    courseOption.text = e.courseId;
     courseList.appendChild(courseOption);
 })
 
@@ -1070,7 +1070,7 @@ let moduleTitle = document.getElementById("moduleTitle").value;
 let courseList = document.getElementById("courseList").value;
 let moduleBatch = document.getElementById("moduleBatch").value;
 let moduleDate = document.getElementById("moduleDate").value;
-let moduleFile = document.getElementById("moduleFile").file[0];
+let moduleFile = document.getElementById("moduleFile").files[0];
 let ModuleDescription = document.getElementById("ModuleDescription").value;
 
 let moduleObj = {mModuleTitle:moduleTitle, mCourseList:courseList, mModulebatch:moduleBatch, mModuleDate:moduleDate, mModuleFile:moduleFile, mModuleDescription:ModuleDescription};
@@ -1110,7 +1110,7 @@ reversedModules.forEach(e => {
         courseCell.style.padding = "20px";
         courseCell.style.textAlign = "center";
         courseCell.style.border = "1px solid white";
-        courseCell.textContent = e.course;
+        courseCell.textContent = e.courseId;
         row.appendChild(courseCell);
 
         let batchCell = document.createElement('td');
@@ -1131,7 +1131,7 @@ reversedModules.forEach(e => {
         fileCell.style.padding = "20px";
         fileCell.style.textAlign = "center";
         fileCell.style.border = "1px solid white";
-        fileCell.textContent = e.file;
+        fileCell.textContent = e.uploe;
         row.appendChild(fileCell);
 
         let descriptionCell = document.createElement('td');
@@ -1219,7 +1219,7 @@ event.preventDefault();
 
 let batches = await getBatch();
 let batchName = document.getElementById("batchName").value;
-if(await batches.find(e => e.batchname === batchName)){
+if(await batches.find(e => e.batchName === batchName)){
     let exists = document.getElementById("exists");
     exists.textContent = "Already exists";
     exists.style.color = "white";
@@ -1247,8 +1247,8 @@ let imCourseList = document.getElementById("imCourseList");
 
 reversedImCourses.forEach(e => {
     let imCourseOption = document.createElement('option');
-    imCourseOption.value = e.coursename;
-    imCourseOption.text = e.coursename;
+    imCourseOption.value = e.courseName;
+    imCourseOption.text = e.courseName;
     imCourseList.appendChild(imCourseOption);
     
 })
@@ -1260,8 +1260,8 @@ let imBatchList = document.getElementById("imBatchList");
 
 reversedImBatches.forEach(e => {
     let imBatchOption = document.createElement('option');
-    imBatchOption.value = e.batchname;
-    imBatchOption.text = e.batchname;
+    imBatchOption.value = e.batchName;
+    imBatchOption.text = e.batchName;
     imBatchList.appendChild(imBatchOption);
     
 })
@@ -1403,7 +1403,7 @@ if(await batchAllStudents.find(e => e.batch === imBatchList)){
         batchRow.appendChild(courseCell);
 
         let batchCell = document.createElement('td');
-        batchCell.textContent = e.batch;
+        batchCell.textContent = e.batchName;
         batchCell.style.padding = "20px";
         batchCell.style.textAlign = "center";
         batchCell.style.border = "1px solid white";

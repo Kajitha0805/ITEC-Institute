@@ -30,5 +30,34 @@ namespace a_zApi.Repository
             }
             return uploadModule;
         }
+        public async Task<List<UploadModule>> GetAllUpModules()
+        {
+            var modules = new List<UploadModule>();
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                var command = new SqlCommand("select * from UploadModule", connection);
+                await connection.OpenAsync();
+
+                using (var reader = await command.ExecuteReaderAsync())
+                {
+                    while (reader.Read())
+                    {
+                        modules.Add(new UploadModule
+                        {
+                            Title = reader.GetString(0),
+                            CourseId = reader.GetString(1),
+                            Batch = reader.GetString(2),
+                            Date = reader.GetDateTime(3),
+                            Uplode = reader["Uplode"] as byte[],
+                            Description = reader.GetString(5),
+                          
+                        });
+
+                    }
+                }
+                return modules;
+            }
+        }
     }
+    
 }

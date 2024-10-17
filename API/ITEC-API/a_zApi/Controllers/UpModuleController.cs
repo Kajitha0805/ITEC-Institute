@@ -16,11 +16,17 @@ namespace a_zApi.Controllers
             _iupModuleService = iupModuleService;
         }
         [HttpPost("Upload_Module")]
-        public async Task<IActionResult>CreateUploadModule([FromBody] UploadModuleRequest uploadModuleRequest)
+        public async Task<IActionResult>CreateUploadModule(UploadModuleRequest uploadModuleRequest)
         {
             var data=await _iupModuleService.CreateUploadModule(uploadModuleRequest);
             return Ok(data);
 
+        }
+        [HttpGet("Get_All_UpModule")]
+        public async Task<IActionResult>GetAllUpModule()
+        {
+            var data=await _iupModuleService.GetAllUpModules();
+            return Ok(data);
         }
     }
 }

@@ -21,7 +21,14 @@ namespace a_zApi.Services
             inputUploadModule.CourseId = uploadModuleRequest.CourseId;
             inputUploadModule.Batch = uploadModuleRequest.Batch;
             inputUploadModule.Date = uploadModuleRequest.Date;
-            inputUploadModule.Uplode = uploadModuleRequest.Uplode;
+            if (uploadModuleRequest.Uplode != null)
+            {
+                using (var memoryStream = new MemoryStream())
+                {
+                    await uploadModuleRequest.Uplode.CopyToAsync(memoryStream);
+                    inputUploadModule.Uplode = memoryStream.ToArray();
+                }
+            };
             inputUploadModule.Description = uploadModuleRequest.Description;
 
             var addedUploadModules = await _iuploadModuleRepository.CreateUploadModule(inputUploadModule);
@@ -36,6 +43,23 @@ namespace a_zApi.Services
 
             return response;
 
+        }
+        public async Task<List<UploadModuleResponse>> GetAllUpModules()
+        {
+            var data = await _iuploadModuleRepository.GetAllUpModules();
+            var response = new List<UploadModuleResponse>();
+            foreach (var module in data)
+            {
+                var upModuleResponse = new UploadModuleResponse();
+                upModuleResponse.Title = module.Title;
+                upModuleResponse.CourseId = module.CourseId;
+                upModuleResponse.Batch = module.Batch;
+                upModuleResponse.Date = module.Date;
+                upModuleResponse.Uplode = module.Uplode;
+                upModuleResponse.Description = module.Description;
+                response.Add(upModuleResponse);
+            }
+            return response;
         }
     }
 }

@@ -124,23 +124,24 @@ export async function getPayment() {
 
 
 export async function addModule(obj){
-  await fetch('http://localhost:5064/api/UpModule/Upload_Module',{
+  await fetch(`http://localhost:5064/api/UpModule/Upload_Module?Title=${title}&CourseId=${courseId}&Batch=${batch}&Date=${uplode}&Description=${description}`,{
     method:'POST',
     headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({"title":obj.mModuleTitle, "courseId":obj.mCourseList, "batch":obj.mModulebatch, "date":obj.mModuleDate, "upload":obj.mModuleFile, "description":obj.mModuleDescription})
+    body: JSON.stringify({"title":obj.mModuleTitle, "courseId":obj.mCourseList, "batch":obj.mModulebatch, "date":obj.mModuleDate, "uplode":obj.mModuleFile, "description":obj.mModuleDescription})
   })
   
 }
 
 export async function getAllModules() {
-  const response = await fetch('http://localhost:3000/modules');
+  const response = await fetch('http://localhost:5064/api/UpModule/Get_All_UpModule');
   const data = await response.json();
+  console.log(data)
   return data;
 }
 
 
 export async function addExpense(obj){
-  await fetch('http://localhost:3000/expense',{
+  await fetch(`http://localhost:5064/api/Expense/Create_Expense?Title=${obj.title}&Date=${obj.date}&Price=${obj.price}&Description=${obj.description}`,{
     method:'POST',
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify({"title":obj.title, "date":obj.date, "price":obj.price, "receipt":obj.receipt, "file":obj.mModuleFile, "description":obj.description})
@@ -165,17 +166,18 @@ export async function getRegFee() {
 
 
 export async function addBatch(obj){
-  await fetch('http://localhost:3000/batch',{
+  await fetch('http://localhost:5064/api/Batch/Create_Batch',{
     method:'POST',
     headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({"batchname":obj.batch})
+    body: JSON.stringify({"batchName":obj.batch})
   })
   
 }
 
 export async function getBatch() {
-  const response = await fetch('http://localhost:3000/batch');
+  const response = await fetch('http://localhost:5064/api/Batch/Get_All_Batch');
   const data = await response.json();
+  console.log(data)
   return data;
 }
 
@@ -188,8 +190,9 @@ export async function getFollowup() {
 }
 
 export async function getExpense() {
-  const response = await fetch('http://localhost:3000/expense');
+  const response = await fetch('http://localhost:5064/api/Expense/Get_All_Expense');
   const data = await response.json();
+  console.log(data)
   return data;
 }
 

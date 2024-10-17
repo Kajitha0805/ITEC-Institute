@@ -6,5 +6,6 @@ namespace a_zApi.IServices
     public interface IUpModuleService
     {
         Task<UploadModuleResponse> CreateUploadModule(UploadModuleRequest uploadModuleRequest);
+        Task<List<UploadModuleResponse>> GetAllUpModules();
     }
 }
