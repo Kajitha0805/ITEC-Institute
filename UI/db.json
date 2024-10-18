@@ -317,26 +317,8 @@
       "email": "undefined",
       "address": "undefined",
       "id": "qqq"
-    },
-    {
-      "id": "971912529v",
-      "firstname": "Denojan",
-      "lastname": "Antony",
-      "date": "2024-10-17",
-      "mobile": "0761028047",
-      "email": "denojan003@gmail.com",
-      "address": "colombo",
-      "Password": "1234"
-    },
-    {
-      "id": "gbxf",
-      "firstname": "m",
-      "lastname": "jathu",
-      "date": "2024-10-17",
-      "mobile": "0768810167",
-      "email": "",
-      "address": "",
-      "Password": "2410"
     }
+  
+   
   ]
 }
