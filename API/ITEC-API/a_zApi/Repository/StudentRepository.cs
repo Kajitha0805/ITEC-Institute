@@ -35,7 +35,7 @@ namespace a_zApi.Repository
             }
             return student;
         }
-
+        //01
         public async Task<List<Student>>GetAllStudent()
         {
             var students = new List<Student>(); 
@@ -67,6 +67,7 @@ namespace a_zApi.Repository
                 return students;
             }
         }
+        //02
         public async Task<Student> GetStudentById(string NicNo)
         {
             Student student=null;
@@ -100,6 +101,7 @@ namespace a_zApi.Repository
                 return student;
             }
         }
+        //03
         public async Task<Student>DeleteStudentById(string NicNo)
         {
             Student student=null;
@@ -139,6 +141,7 @@ namespace a_zApi.Repository
             }
             return student;
         }
+        //04
         public async Task<Student> FindStudentById(string NicNo)
         {
             Student student = null;
