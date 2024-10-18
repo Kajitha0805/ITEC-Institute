@@ -46,7 +46,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -61,21 +61,21 @@
               "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
-            },
-            {
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\Computer Corner\\Desktop\\final-project\\ITEC-Institute\\API\\ITEC-API\\a_zApi\\appsettings.json",
               "RelativeDocumentMoniker": "a_zApi\\appsettings.json",
-              "ToolTip": "C:\\Users\\Computer Corner\\Desktop\\final-project\\ITEC-Institute\\API\\ITEC-API\\a_zApi\\appsettings.json",
-              "RelativeToolTip": "a_zApi\\appsettings.json",
+              "ToolTip": "C:\\Users\\Computer Corner\\Desktop\\final-project\\ITEC-Institute\\API\\ITEC-API\\a_zApi\\appsettings.json*",
+              "RelativeToolTip": "a_zApi\\appsettings.json*",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAACFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
               "WhenOpened": "2024-10-17T18:56:56.249Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
             },
             {
               "$type": "Document",

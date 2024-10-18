@@ -1,4 +1,4 @@
-import {addStudents, updateStudent, removeSingleStudent, addNewCourse, getCourses, addNewStudent, courseUpdate, deleteSingleCourse, getStudents, addPayment, getPayment, addModule, getAllModules, addExpense, changeRegFee, getRegFee, addBatch, getBatch, getExpense} from '../api.js';
+import {addStudents, updateStudent, removeSingleStudent, addNewCourse, getSingleCourse, getCourses, addNewStudent, courseUpdate, deleteSingleCourse, getStudents, addPayment, getPayment, addModule, getAllModules, addExpense, changeRegFee, getRegFee, addBatch, getBatch, getExpense} from '../api.js';
 
 
 
@@ -364,8 +364,8 @@ let allBatches = await getBatch();
 let reversedBatch = allBatches.reverse();
 reversedBatch.forEach(e => {
     let option = document.createElement('option');
-    option.value = e.batchName;
-    option.text = e.batchName;
+    option.value = e.batchname;
+    option.text = e.batchname;
     stuBatch.appendChild(option);
 })
 
@@ -373,12 +373,12 @@ reversedBatch.forEach(e => {
 // ......................................................................................
 // Register Add Button
 
-let RegFee = await getRegFee();
-let sRegFee = await RegFee.find(e => e.id === "1");
-let finalRegFee = sRegFee.regfee;
+// let RegFee = await getRegFee();
+// let sRegFee = await RegFee.find(e => e.nicNo === "1");
+// let finalRegFee = sRegFee.regfee;
 
-let stuRegFee = document.getElementById("stuRegFee");
-stuRegFee.value = finalRegFee;
+// let stuRegFee = document.getElementById("stuRegFee");
+// stuRegFee.value = finalRegFee;
 
 
 
@@ -605,14 +605,23 @@ document.getElementById("addCourseForm").addEventListener('submit', async functi
     }else{
 
     let addCourseName = document.getElementById("addCourseName").value;
+    let addFile = document.getElementById("addFile").files[0];
     let addCourseDuration = document.getElementById("addCourseDuration").value;
     let addCourseFee = document.getElementById("addCourseFee").value;
     let addCourseInstructor = document.getElementById("addCourseInstructor").value;
     let addCourseSyllabus = document.getElementById("addCourseSyllabus").value;
+    
+    const courseDetails = new FormData();
+    courseDetails.append('CourseId',addCourseId);
+    courseDetails.append('CourseName',addCourseName);
+    courseDetails.append('CourseImage',addFile);
+    courseDetails.append('Duration',addCourseDuration);
+    courseDetails.append('Fee',addCourseFee);
+    courseDetails.append('Instructor',addCourseInstructor);
+    courseDetails.append('Syllabus',addCourseSyllabus);
 
-    let courseObj = {courseId:addCourseId, courseName:addCourseName, courseDuration:addCourseDuration, courseFee:addCourseFee, courseInstructor:addCourseInstructor, courseSyllabus:addCourseSyllabus};
 
-    await addNewCourse(courseObj);
+    await addNewCourse(courseDetails);
     event.target.reset();
     alert("Successfully added");
     }
@@ -654,19 +663,21 @@ document.getElementById("editcourseModalClose").onclick = function(){
 // Edit Course Modal Search Button
 document.getElementById("courseSearch").onclick = async function(){
     let searchCourseId = document.getElementById("searchCourseId").value;
-    const courseList = await getCourses();
+    const singleCourse = await getSingleCourse(searchCourseId);
+    
 
-    if(await courseList.find(e => e.courseId === searchCourseId)){
+    if(singleCourse != null){
         courseError.innerText = "";
-    let e = await courseList.find(e => e.courseId === searchCourseId);
+    
     let editCourseDynamic = document.getElementById("editCourseDynamic");
     editCourseDynamic.style.display = "block";
-    document.getElementById("editCourseId").value = e.courseId;
-    document.getElementById("editCourseName").value = e.courseName;
-    document.getElementById("editDuration").value = e.duration;
-    document.getElementById("editFee").value = e.fee;
-    document.getElementById("editInstructor").value = e.instructor;
-    document.getElementById("editSyllabus").value = e.syllabus;
+    document.getElementById("editCourseId").value = singleCourse.courseId;
+    document.getElementById("editCourseName").value = singleCourse.courseName;
+    document.getElementById("oldImage").innerHTML = `<img src="data:image/jpg;base64,${singleCourse.courseImage}" height="30px">`;
+    document.getElementById("editDuration").value = singleCourse.duration;
+    document.getElementById("editFee").value = singleCourse.fee;
+    document.getElementById("editInstructor").value = singleCourse.instructor;
+    document.getElementById("editSyllabus").value = singleCourse.syllabus;
     }
     else{
         editCourseDynamic.style.display = "none";
@@ -684,6 +695,7 @@ document.getElementById("courseSearch").onclick = async function(){
 // Edit Course Modal Edit Button
 document.getElementById("courseEditBtn").onclick = function(){
     editCourseName.disabled = false;
+    editImage.disabled = false;
     editDuration.disabled = false;
     editFee.disabled = false;
     editInstructor.disabled = false;
@@ -696,19 +708,29 @@ document.getElementById("courseEditBtn").onclick = function(){
 document.getElementById("editCourseDynamic").addEventListener('submit', async function(event){
     event.preventDefault();
     let searchCourseId = document.getElementById("searchCourseId").value;
-    // let editCourseId=document.getElementById()
+
     let editCourseName = document.getElementById("editCourseName").value;
+    let editImage = document.getElementById("editImage").files[0];
     let editDuration = document.getElementById("editDuration").value
     let editFee = document.getElementById("editFee").value;
     let editInstructor = document.getElementById("editInstructor").value;
     let editSyllabus = document.getElementById("editSyllabus").value;
 
-    const editCourseObj = {eCourseName:editCourseName, eDuration:editDuration, eFee:editFee, eInstructor:editInstructor, eSyllabus:editSyllabus}
+    let updateCourse = new FormData();
+    updateCourse.append('CourseName', editCourseName);
+    updateCourse.append('CourseImage', editImage);
+    updateCourse.append('Duration', editDuration);
+    updateCourse.append('Fee', editFee);
+    updateCourse.append('Instructor', editInstructor);
+    updateCourse.append('Syllabus', editSyllabus);
 
-    await courseUpdate(searchCourseId, editCourseObj);
-    event.target.reset();
-
+    await courseUpdate(searchCourseId, updateCourse);
+    
+    
     alert("Successfully updated");
+    document.getElementById("searchCourseId").value = "";
+    document.getElementById("oldImage").innerHTML = ``;
+    event.target.reset();
 });
 
 
@@ -743,16 +765,14 @@ document.getElementById("removeCourseClose").onclick = function(){
 let removeCourseSearch = document.getElementById("removeCourseSearch");
 removeCourseSearch.onclick = async function(){
     let courseSearchId = document.getElementById("courseSearchId").value;
-    let courseList = await getCourses();
+    var singleCourse = await getSingleCourse(courseSearchId);
 
-    if(await courseList.find(e => e.courseId === courseSearchId)){
+    if(singleCourse != null){
         removeCourseError.innerText = "";
-        let e = await courseList.find(e => e.courseId === courseSearchId);
-
-    document.getElementById("removeCourseDynamic").style.display = "flex";
-    document.getElementById("cId").innerText = e.courseId;
-    document.getElementById("cName").innerText = e.courseName;
-    document.getElementById("cInstructor").innerText = e.instructor; 
+        document.getElementById("removeCourseDynamic").style.display = "flex";
+        document.getElementById("cId").innerText = singleCourse.courseId;
+        document.getElementById("cName").innerText = singleCourse.courseName;
+        document.getElementById("cInstructor").innerText = singleCourse.instructor; 
     }else{
         document.getElementById("removeCourseDynamic").style.display = "none";
         let removeCourseError = document.getElementById("removeCourseError");
@@ -1040,8 +1060,8 @@ let reversedallCourses = allCourses.reverse();
 
 await reversedallCourses.forEach(e => {
     let courseOption = document.createElement('option');
-    courseOption.value = e.courseId;
-    courseOption.text = e.courseId;
+    courseOption.value = e.courseName;
+    courseOption.text = e.courseName;
     courseList.appendChild(courseOption);
 })
 
@@ -1070,7 +1090,7 @@ let moduleTitle = document.getElementById("moduleTitle").value;
 let courseList = document.getElementById("courseList").value;
 let moduleBatch = document.getElementById("moduleBatch").value;
 let moduleDate = document.getElementById("moduleDate").value;
-let moduleFile = document.getElementById("moduleFile").files[0];
+let moduleFile = document.getElementById("moduleFile").value;
 let ModuleDescription = document.getElementById("ModuleDescription").value;
 
 let moduleObj = {mModuleTitle:moduleTitle, mCourseList:courseList, mModulebatch:moduleBatch, mModuleDate:moduleDate, mModuleFile:moduleFile, mModuleDescription:ModuleDescription};
@@ -1110,7 +1130,7 @@ reversedModules.forEach(e => {
         courseCell.style.padding = "20px";
         courseCell.style.textAlign = "center";
         courseCell.style.border = "1px solid white";
-        courseCell.textContent = e.courseId;
+        courseCell.textContent = e.course;
         row.appendChild(courseCell);
 
         let batchCell = document.createElement('td');
@@ -1131,7 +1151,7 @@ reversedModules.forEach(e => {
         fileCell.style.padding = "20px";
         fileCell.style.textAlign = "center";
         fileCell.style.border = "1px solid white";
-        fileCell.textContent = e.uploe;
+        fileCell.textContent = e.file;
         row.appendChild(fileCell);
 
         let descriptionCell = document.createElement('td');
@@ -1219,7 +1239,7 @@ event.preventDefault();
 
 let batches = await getBatch();
 let batchName = document.getElementById("batchName").value;
-if(await batches.find(e => e.batchName === batchName)){
+if(await batches.find(e => e.batchname === batchName)){
     let exists = document.getElementById("exists");
     exists.textContent = "Already exists";
     exists.style.color = "white";
@@ -1260,8 +1280,8 @@ let imBatchList = document.getElementById("imBatchList");
 
 reversedImBatches.forEach(e => {
     let imBatchOption = document.createElement('option');
-    imBatchOption.value = e.batchName;
-    imBatchOption.text = e.batchName;
+    imBatchOption.value = e.batchname;
+    imBatchOption.text = e.batchname;
     imBatchList.appendChild(imBatchOption);
     
 })
@@ -1403,7 +1423,7 @@ if(await batchAllStudents.find(e => e.batch === imBatchList)){
         batchRow.appendChild(courseCell);
 
         let batchCell = document.createElement('td');
-        batchCell.textContent = e.batchName;
+        batchCell.textContent = e.batch;
         batchCell.style.padding = "20px";
         batchCell.style.textAlign = "center";
         batchCell.style.border = "1px solid white";

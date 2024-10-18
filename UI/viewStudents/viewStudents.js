@@ -30,7 +30,7 @@ async function getAllStudents(){
         let batchcell = document.createElement('td');
         batchcell.style.padding = "20px";
         batchcell.style.textAlign = "center";
-        batchcell.textContent = e.batchName;
+        batchcell.textContent = e.batch;
         row.appendChild(batchcell);
 
         let coursecell = document.createElement('td');
