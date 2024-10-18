@@ -1,4 +1,4 @@
-import {addStudents, updateStudent, removeSingleStudent, addNewCourse, getCourses, addNewStudent, courseUpdate, deleteSingleCourse, getStudents, addPayment, getPayment, addModule, getAllModules, addExpense, changeRegFee, getRegFee, addBatch, getBatch, getExpense} from '../api.js';
+import {addStudents, updateStudent, removeSingleStudent, addNewCourse, getSingleCourse, getCourses, addNewStudent, courseUpdate, deleteSingleCourse, getStudentById, getStudents, addPayment, getPayment, addModule, getAllModules, addExpense, changeRegFee, getRegFee, addBatch, getBatch, getExpense} from '../api.js';
 
 
 
@@ -364,8 +364,8 @@ let allBatches = await getBatch();
 let reversedBatch = allBatches.reverse();
 reversedBatch.forEach(e => {
     let option = document.createElement('option');
-    option.value = e.batchName;
-    option.text = e.batchName;
+    option.value = e.batchname;
+    option.text = e.batchname;
     stuBatch.appendChild(option);
 })
 
@@ -373,43 +373,44 @@ reversedBatch.forEach(e => {
 // ......................................................................................
 // Register Add Button
 
-let RegFee = await getRegFee();
-let sRegFee = await RegFee.find(e => e.id === "1");
-let finalRegFee = sRegFee.regfee;
+// let RegFee = await getRegFee();
+// let sRegFee = await RegFee.find(e => e.nicNo === "1");
+// let finalRegFee = sRegFee.regfee;
 
-let stuRegFee = document.getElementById("stuRegFee");
-stuRegFee.value = finalRegFee;
+// let stuRegFee = document.getElementById("stuRegFee");
+// stuRegFee.value = finalRegFee;
 
 
 
 document.getElementById("register").addEventListener('submit', async function(event){
     event.preventDefault();
-    let stuId = document.getElementById("stuId").value;
 
-    let allStudents = await getStudents();
+    let stuId = document.getElementById("stuId").value;
+    // var singleStudent = await getStudentById(stuId);
     
-    if(await allStudents.find(e => e.nicNo === stuId)){
-        alert("The Student ID is already exists");
+    // if(singleStudent != null){
+    //     alert("The Student ID is already exists");
     
-    }
-    else{
+    // }
+    // else{
         
     let stuFName = document.getElementById("stuFName").value;
     let stuLName = document.getElementById("stuLName").value;
-    let selectCourse = document.getElementById("selectCourse").value;
-    let stuBatch = document.getElementById("stuBatch").value;
     let stuDate = document.getElementById("stuDate").value;
     let stuMobile = document.getElementById("stuMobile").value;
     let stuEmail = document.getElementById("stuEmail").value;
     let stuAddress = document.getElementById("stuAddress").value;  
-    let stuAddiFee = document.getElementById("stuAddiFee").value;
+   
 
-    let studentObject = {nicNo:stuId, firstName:stuFName, lastName:stuLName, courseId:selectCourse, batch:stuBatch, date:stuDate, mobileNo:stuMobile, email:stuEmail, address:stuAddress, regFee:finalRegFee, additionalFee:stuAddiFee};
+    let studentObject = {nicNo:stuId, firstName:stuFName, lastName:stuLName, date:stuDate, mobileNo:stuMobile, email:stuEmail, address:stuAddress};
 
-    let paymentObject = {studentId:stuId, studentDate:stuDate, studentAddiFee:stuAddiFee};
     
-    await addPayment(paymentObject);
     await addNewStudent(studentObject);
+
+
+    // let selectCourse = document.getElementById("selectCourse").value;
+    // let stuBatch = document.getElementById("stuBatch").value;
+    // let stuAddiFee = document.getElementById("stuAddiFee").value;
 
     alert("Successfully added as new student");
 
@@ -417,7 +418,7 @@ document.getElementById("register").addEventListener('submit', async function(ev
     a.href = `mailto:${stuEmail}?subject=WelCome to ITEC&body=Hi ${stuFName}, Congratulations... %0A%0AYou just have registered in ITEC on ${stuDate} to follow the course ${selectCourse}. Please find the link below of our student portal. You can signup with your N.I.C No ${stuId} you used for your course registration. Thank you.%0A%0A%0A The Student portal link - https://www.itecstudentportal.com`;
     a.click();
     event.target.reset();
-    }
+    // }
 });
 
 // ........................................................
@@ -442,20 +443,19 @@ let search = document.getElementById("search");
 
 search.onclick = async function(){
     let id = document.getElementById("searchId").value;
-    const wholeStudents = await getStudents();
+    const singleStudent = await getStudentById(id);
 
-    if(await wholeStudents.find(e => e.id === id)){
-    let e = wholeStudents.find(e => e.id === id);
+    if(singleStudent != null){
     errMessage.textContent = "";
     document.getElementById("editDynamic").style.display = "block";
-    document.getElementById("seId").value = e.nicNo;
-    document.getElementById("seFname").value = e.firstName;
-    document.getElementById("seLname").value = e.lastName;
-    document.getElementById("seCourse").value = e.courseId;
-    document.getElementById("seBatch").value = e.batch;
-    document.getElementById("seMobile").value = e.mobileNo;
-    document.getElementById("seEmail").value = e.email;
-    document.getElementById("seAddress").value = e.address;
+    document.getElementById("seId").value = singleStudent.nicNo;
+    document.getElementById("seFname").value = singleStudent.firstName;
+    document.getElementById("seLname").value = singleStudent.lastName;
+    document.getElementById("seCourse").value = '';
+    document.getElementById("seBatch").value = '';
+    document.getElementById("seMobile").value = singleStudent.mobileNo;
+    document.getElementById("seEmail").value = singleStudent.email;
+    document.getElementById("seAddress").value = singleStudent.address;
     }
     else{
         let errMessage = document.getElementById("errMessage");
@@ -489,13 +489,11 @@ document.getElementById("editDynamic").addEventListener('submit', async function
     let putId = document.getElementById("searchId").value;
     let seFname = document.getElementById("seFname").value;
     let seLname = document.getElementById("seLname").value;
-    let seCourse = document.getElementById("seCourse").value;
-    let seBatch = document.getElementById("seBatch").value;
     let seMobile = document.getElementById("seMobile").value;
     let seEmail = document.getElementById("seEmail").value;
     let seAddress = document.getElementById("seAddress").value;
 
-    const putStudents = {Fname:seFname, Lname:seLname, Course:seCourse, Batch:seBatch, Mobile:seMobile, Email:seEmail, Address:seAddress};
+    const putStudents = {Fname:seFname, Lname:seLname, Mobile:seMobile, Email:seEmail, Address:seAddress};
 
     await updateStudent(putId, putStudents);
     event.target.reset();
@@ -534,15 +532,14 @@ let removeDynamic = document.getElementById("removeDynamic");
 
 document.getElementById("removeSearch").onclick = async function(){
     let removeSearchId = document.getElementById("removeSearchId").value;
-    let student = await getStudents();
+    const singleStudent = await getStudentById(removeSearchId);
 
-    if(student.find(e => e.nicNo === removeSearchId)){
-    let e = student.find(e => e.nicNo === removeSearchId);
+    if(singleStudent != null){
     removeError.textContent = "";
     removeDynamic.style.display = "flex";
-    document.getElementById("removeId").innerText = e.nicNo;
-    document.getElementById("removeName").innerText = e.firstName;
-    document.getElementById("removeBatch").innerText = e.batch;
+    document.getElementById("removeId").innerText = singleStudent.nicNo;
+    document.getElementById("removeName").innerText = singleStudent.firstName;
+    document.getElementById("removeBatch").innerText = '';
     }
     else{
         removeDynamic.style.display = "none";
@@ -605,14 +602,23 @@ document.getElementById("addCourseForm").addEventListener('submit', async functi
     }else{
 
     let addCourseName = document.getElementById("addCourseName").value;
+    let addFile = document.getElementById("addFile").files[0];
     let addCourseDuration = document.getElementById("addCourseDuration").value;
     let addCourseFee = document.getElementById("addCourseFee").value;
     let addCourseInstructor = document.getElementById("addCourseInstructor").value;
     let addCourseSyllabus = document.getElementById("addCourseSyllabus").value;
+    
+    const courseDetails = new FormData();
+    courseDetails.append('CourseId',addCourseId);
+    courseDetails.append('CourseName',addCourseName);
+    courseDetails.append('CourseImage',addFile);
+    courseDetails.append('Duration',addCourseDuration);
+    courseDetails.append('Fee',addCourseFee);
+    courseDetails.append('Instructor',addCourseInstructor);
+    courseDetails.append('Syllabus',addCourseSyllabus);
 
-    let courseObj = {courseId:addCourseId, courseName:addCourseName, courseDuration:addCourseDuration, courseFee:addCourseFee, courseInstructor:addCourseInstructor, courseSyllabus:addCourseSyllabus};
 
-    await addNewCourse(courseObj);
+    await addNewCourse(courseDetails);
     event.target.reset();
     alert("Successfully added");
     }
@@ -654,19 +660,21 @@ document.getElementById("editcourseModalClose").onclick = function(){
 // Edit Course Modal Search Button
 document.getElementById("courseSearch").onclick = async function(){
     let searchCourseId = document.getElementById("searchCourseId").value;
-    const courseList = await getCourses();
+    const singleCourse = await getSingleCourse(searchCourseId);
+    
 
-    if(await courseList.find(e => e.courseId === searchCourseId)){
+    if(singleCourse != null){
         courseError.innerText = "";
-    let e = await courseList.find(e => e.courseId === searchCourseId);
+    
     let editCourseDynamic = document.getElementById("editCourseDynamic");
     editCourseDynamic.style.display = "block";
-    document.getElementById("editCourseId").value = e.courseId;
-    document.getElementById("editCourseName").value = e.courseName;
-    document.getElementById("editDuration").value = e.duration;
-    document.getElementById("editFee").value = e.fee;
-    document.getElementById("editInstructor").value = e.instructor;
-    document.getElementById("editSyllabus").value = e.syllabus;
+    document.getElementById("editCourseId").value = singleCourse.courseId;
+    document.getElementById("editCourseName").value = singleCourse.courseName;
+    document.getElementById("oldImage").innerHTML = `<img src="data:image/jpg;base64,${singleCourse.courseImage}" height="30px">`;
+    document.getElementById("editDuration").value = singleCourse.duration;
+    document.getElementById("editFee").value = singleCourse.fee;
+    document.getElementById("editInstructor").value = singleCourse.instructor;
+    document.getElementById("editSyllabus").value = singleCourse.syllabus;
     }
     else{
         editCourseDynamic.style.display = "none";
@@ -684,6 +692,7 @@ document.getElementById("courseSearch").onclick = async function(){
 // Edit Course Modal Edit Button
 document.getElementById("courseEditBtn").onclick = function(){
     editCourseName.disabled = false;
+    editImage.disabled = false;
     editDuration.disabled = false;
     editFee.disabled = false;
     editInstructor.disabled = false;
@@ -696,19 +705,29 @@ document.getElementById("courseEditBtn").onclick = function(){
 document.getElementById("editCourseDynamic").addEventListener('submit', async function(event){
     event.preventDefault();
     let searchCourseId = document.getElementById("searchCourseId").value;
-    // let editCourseId=document.getElementById()
+
     let editCourseName = document.getElementById("editCourseName").value;
+    let editImage = document.getElementById("editImage").files[0];
     let editDuration = document.getElementById("editDuration").value
     let editFee = document.getElementById("editFee").value;
     let editInstructor = document.getElementById("editInstructor").value;
     let editSyllabus = document.getElementById("editSyllabus").value;
 
-    const editCourseObj = {eCourseName:editCourseName, eDuration:editDuration, eFee:editFee, eInstructor:editInstructor, eSyllabus:editSyllabus}
+    let updateCourse = new FormData();
+    updateCourse.append('CourseName', editCourseName);
+    updateCourse.append('CourseImage', editImage);
+    updateCourse.append('Duration', editDuration);
+    updateCourse.append('Fee', editFee);
+    updateCourse.append('Instructor', editInstructor);
+    updateCourse.append('Syllabus', editSyllabus);
 
-    await courseUpdate(searchCourseId, editCourseObj);
-    event.target.reset();
-
+    await courseUpdate(searchCourseId, updateCourse);
+    
+    
     alert("Successfully updated");
+    document.getElementById("searchCourseId").value = "";
+    document.getElementById("oldImage").innerHTML = ``;
+    event.target.reset();
 });
 
 
@@ -743,16 +762,14 @@ document.getElementById("removeCourseClose").onclick = function(){
 let removeCourseSearch = document.getElementById("removeCourseSearch");
 removeCourseSearch.onclick = async function(){
     let courseSearchId = document.getElementById("courseSearchId").value;
-    let courseList = await getCourses();
+    var singleCourse = await getSingleCourse(courseSearchId);
 
-    if(await courseList.find(e => e.courseId === courseSearchId)){
+    if(singleCourse != null){
         removeCourseError.innerText = "";
-        let e = await courseList.find(e => e.courseId === courseSearchId);
-
-    document.getElementById("removeCourseDynamic").style.display = "flex";
-    document.getElementById("cId").innerText = e.courseId;
-    document.getElementById("cName").innerText = e.courseName;
-    document.getElementById("cInstructor").innerText = e.instructor; 
+        document.getElementById("removeCourseDynamic").style.display = "flex";
+        document.getElementById("cId").innerText = singleCourse.courseId;
+        document.getElementById("cName").innerText = singleCourse.courseName;
+        document.getElementById("cInstructor").innerText = singleCourse.instructor; 
     }else{
         document.getElementById("removeCourseDynamic").style.display = "none";
         let removeCourseError = document.getElementById("removeCourseError");
@@ -1040,8 +1057,8 @@ let reversedallCourses = allCourses.reverse();
 
 await reversedallCourses.forEach(e => {
     let courseOption = document.createElement('option');
-    courseOption.value = e.courseId;
-    courseOption.text = e.courseId;
+    courseOption.value = e.courseName;
+    courseOption.text = e.courseName;
     courseList.appendChild(courseOption);
 })
 
@@ -1070,7 +1087,7 @@ let moduleTitle = document.getElementById("moduleTitle").value;
 let courseList = document.getElementById("courseList").value;
 let moduleBatch = document.getElementById("moduleBatch").value;
 let moduleDate = document.getElementById("moduleDate").value;
-let moduleFile = document.getElementById("moduleFile").files[0];
+let moduleFile = document.getElementById("moduleFile").value;
 let ModuleDescription = document.getElementById("ModuleDescription").value;
 
 let moduleObj = {mModuleTitle:moduleTitle, mCourseList:courseList, mModulebatch:moduleBatch, mModuleDate:moduleDate, mModuleFile:moduleFile, mModuleDescription:ModuleDescription};
@@ -1110,7 +1127,7 @@ reversedModules.forEach(e => {
         courseCell.style.padding = "20px";
         courseCell.style.textAlign = "center";
         courseCell.style.border = "1px solid white";
-        courseCell.textContent = e.courseId;
+        courseCell.textContent = e.course;
         row.appendChild(courseCell);
 
         let batchCell = document.createElement('td');
@@ -1131,7 +1148,7 @@ reversedModules.forEach(e => {
         fileCell.style.padding = "20px";
         fileCell.style.textAlign = "center";
         fileCell.style.border = "1px solid white";
-        fileCell.textContent = e.uploe;
+        fileCell.textContent = e.file;
         row.appendChild(fileCell);
 
         let descriptionCell = document.createElement('td');
@@ -1219,7 +1236,7 @@ event.preventDefault();
 
 let batches = await getBatch();
 let batchName = document.getElementById("batchName").value;
-if(await batches.find(e => e.batchName === batchName)){
+if(await batches.find(e => e.batchname === batchName)){
     let exists = document.getElementById("exists");
     exists.textContent = "Already exists";
     exists.style.color = "white";
@@ -1260,8 +1277,8 @@ let imBatchList = document.getElementById("imBatchList");
 
 reversedImBatches.forEach(e => {
     let imBatchOption = document.createElement('option');
-    imBatchOption.value = e.batchName;
-    imBatchOption.text = e.batchName;
+    imBatchOption.value = e.batchname;
+    imBatchOption.text = e.batchname;
     imBatchList.appendChild(imBatchOption);
     
 })
@@ -1403,7 +1420,7 @@ if(await batchAllStudents.find(e => e.batch === imBatchList)){
         batchRow.appendChild(courseCell);
 
         let batchCell = document.createElement('td');
-        batchCell.textContent = e.batchName;
+        batchCell.textContent = e.batch;
         batchCell.style.padding = "20px";
         batchCell.style.textAlign = "center";
         batchCell.style.border = "1px solid white";

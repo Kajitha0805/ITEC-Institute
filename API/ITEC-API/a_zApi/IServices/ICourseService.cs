@@ -8,7 +8,8 @@ namespace a_zApi.IServices
         Task CreateCourse(CourseRequest courseRequest);
         Task<List<CourseResponse>> GetAllCourses();
         Task<CourseResponse> GetCourseById(string CourseId);
-        Task DeleteCourseById(string CourseId);
         Task UpdateCourse(string CourseId, CourseRequest courseRequest);
+        Task DeleteCourseById(string CourseId);
+        
     }
 }

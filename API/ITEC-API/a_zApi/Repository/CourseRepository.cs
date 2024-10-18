@@ -89,26 +89,12 @@ namespace a_zApi.Repository
                 return course;
             }
         }
-        public async Task DeleteCourseById(string CourseId)
-        {
-            
-            using (var connection = new SqlConnection(_connectionString))
-            {
-                await connection.OpenAsync();
-                
-                    var deleteCommand = new SqlCommand("DELETE FROM Courses WHERE CourseId=@CourseId", connection);
-                    deleteCommand.Parameters.AddWithValue("@CourseId", CourseId);
-                    await deleteCommand.ExecuteNonQueryAsync();
-                
-
-            }
-          
-        }
+       
 
         
         public async Task UpdateCourse(string CourseId, Course course)
         {
-            Course updateCourse = null;    
+             
             using(var connection = new SqlConnection(_connectionString))
             {
                 var command = new SqlCommand("UPDATE Courses SET CourseName = @CourseName, CourseImage = @courseImage, Duration = @Duration,Fee=@Fee,Instructor=@Instructor,Syllabus=@Syllabus WHERE CourseId = @CourseId", connection);
@@ -120,17 +106,27 @@ namespace a_zApi.Repository
                 command.Parameters.AddWithValue("@Instructor", course.Instructor);
                 command.Parameters.AddWithValue("@Syllabus", course.Syllabus);
 
-
                 await connection.OpenAsync();
-                var affectedRows= await command.ExecuteNonQueryAsync();
-                if (affectedRows>0)
-                {
-                    updateCourse=course;
-                }
+                await command.ExecuteNonQueryAsync();
+                
 
             }
             
            
+        }
+
+
+        public async Task DeleteCourseById(string CourseId)
+        {
+
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                var deleteCommand = new SqlCommand("DELETE FROM Courses WHERE CourseId=@CourseId", connection);
+                deleteCommand.Parameters.AddWithValue("@CourseId", CourseId);
+                await connection.OpenAsync();
+                await deleteCommand.ExecuteNonQueryAsync();
+            }
+
         }
 
     }

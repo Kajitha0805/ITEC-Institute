@@ -7,7 +7,7 @@ namespace a_zApi.IRepository
         Task CreateCourse(Course course);
         Task<List<Course>> GetAllCourse();
         Task<Course> GetCourseById(string CourseId);
-        Task DeleteCourseById(string CourseId);
         Task UpdateCourse(string CourseId, Course course);
+        Task DeleteCourseById(string CourseId);
     }
 }

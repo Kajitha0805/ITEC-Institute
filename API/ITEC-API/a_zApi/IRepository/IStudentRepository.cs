@@ -4,12 +4,11 @@ namespace a_zApi.IRepository
 {
     public interface IStudentRepository
     {
-        Task<Student> CreateStudent(Student student);
+        Task CreateStudent(Student student);
         Task<List<Student>> GetAllStudent();
         Task<Student> GetStudentById(string NicNo);
-        Task<Student> DeleteStudentById(string NicNo);
-        Task<Student> FindStudentById(string NicNo);
-        Task<Student> UpdateStudent(Student student);
+        Task UpdateStudent(string NicNo, Student student);
+        Task DeleteStudentById(string NicNo);
 
     }
 }

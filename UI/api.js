@@ -14,33 +14,32 @@ export async function getAdmin() {
 }
 
 export async function addStudents(obj){
-  await fetch('http://localhost:5064/api/FollowUp/Create_FollowUp',{
+  await fetch('http://localhost:3000/followup',{
     method:'POST',
     headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({"name":obj.Name, "moblie":obj.Mobile, "courseId":obj.Course, "date":obj.Date, "email":obj.Email, "address":obj.Address, "description":obj.Description})
+    body: JSON.stringify({"name":obj.Name, "mobile":obj.Mobile, "course":obj.Course, "date":obj.Date, "email":obj.Email, "address":obj.Address, "description":obj.Description})
   })
   
 }
 
 
-// export asy nc function getStudentById(id) {
-//   const response = await fetch(`http://localhost:3000/students/${id}`);
-//   const data = await response.json();
-//   return data;
-// }
+export async function getStudentById(id) {
+  const response = await fetch(`http://localhost:5064/api/Student/Get_Student_By_Id?NicNo=${id}`);
+  const data = await response.json();
+  return data;
+}
 
-export async function updateStudent(putId, putStudents) {
-  const response = await fetch(`http://localhost:5064/api/Student/Update_Student?NicNo=${putId}`, {
+export async function updateStudent(putId, obj) {
+  await fetch(`http://localhost:5064/api/Student/Update_Student?NicNo=${putId}`, {
     method: 'PATCH',
     headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({firstName:putStudents.Fname, lastName:putStudents.Lname, courseId:putStudents.Course, batch:putStudents.Batch, mobileNo:putStudents.Mobile, email:putStudents.Email, address:putStudents.Address})
+    body: JSON.stringify({firstName:obj.Fname, lastName:obj.Lname, mobileNo:obj.Mobile, email:obj.Email, address:obj.Address})
   });
 }
 
 export async function getStudents() {
   const response = await fetch('http://localhost:5064/api/Student/Get_All_Student');
   const data = await response.json();
-  console.log(data);
   return data;
 }
 
@@ -51,52 +50,40 @@ export async function removeSingleStudent(nicNo) {
   });
 }
 
-export async function addNewCourse(obj){
+export async function addNewCourse(courseDetails){
   await fetch('http://localhost:5064/api/Course/Create_Course',{
     method:'POST',
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({"CourseId":obj.courseId, "CourseName":obj.courseName, "Duration":obj.courseDuration, "Fee":obj.courseFee, "instructor":obj.courseInstructor, "Syllabus":obj.courseSyllabus})
+    body: courseDetails
   })
 }
 
 export async function getCourses() {
   const response = await fetch('http://localhost:5064/api/Course/Get_All_Course');
   const data = await response.json();
-  console.log(data)
   return data;
 }
 
 export async function addNewStudent(obj){
-  await fetch(`http://localhost:5064/api/Student/Create_Student`,{
+  await fetch('http://localhost:5064/api/Student/Create_Student',{
     method:'POST',
     headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({"nicNo":obj.nicNo, "firstName":obj.firstName, "lastName":obj.lastName, "courseId":obj.courseId, "batch":obj.batch, "date":obj.date, "mobileNo":obj.mobileNo, "email":obj.email, "address":obj.address, "regFee":obj.regFee, "additionalFee":obj.additionalFee})
+    body: JSON.stringify({nicNo:obj.nicNo, firstName:obj.firstName, lastName:obj.lastName, date:obj.date, mobileNo:obj.mobileNo, email:obj.email, address:obj.address})
   })
 }
 
 
-export async function getSingleCourse(id) {
+export async function getSingleCourse(courseId) {
   const response = await fetch(`http://localhost:5064/api/Course/Get_Course_By_Id?CourseId=${courseId}`);
   const data = await response.json();
   return data;
 }
 
+
 export async function courseUpdate(courseId, obj) {
-  const updateData={courseName:obj.eCourseName, duration:obj.eDuration, fee:obj.eFee, instructor:obj.eInstructor, syllabus:obj.eSyllabus};
-  console.log(updateData)
-  const response = await fetch(`http://localhost:5064/api/Course/Update_Course?CourseId=${courseId}`, {
+  await fetch(`http://localhost:5064/api/Course/Update_Course?CourseId=${courseId}`, {
     method: 'PATCH',
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify(updateData)
-});
-
-if (!response.ok) {
-    const errorMessage = await response.text(); // or response.json() if the error is returned in JSON
-    console.error('Error updating course:', response.status, errorMessage);
-} else {
-    console.log('Course updated successfully:', await response.json());
-}
-
+    body: obj
+  });
 }
 
 
@@ -124,24 +111,23 @@ export async function getPayment() {
 
 
 export async function addModule(obj){
-  await fetch(`http://localhost:5064/api/UpModule/Upload_Module?Title=${title}&CourseId=${courseId}&Batch=${batch}&Date=${uplode}&Description=${description}`,{
+  await fetch('http://localhost:3000/modules',{
     method:'POST',
     headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({"title":obj.mModuleTitle, "courseId":obj.mCourseList, "batch":obj.mModulebatch, "date":obj.mModuleDate, "uplode":obj.mModuleFile, "description":obj.mModuleDescription})
+    body: JSON.stringify({"title":obj.mModuleTitle, "course":obj.mCourseList, "batch":obj.mModulebatch, "date":obj.mModuleDate, "file":obj.mModuleFile, "description":obj.mModuleDescription})
   })
   
 }
 
 export async function getAllModules() {
-  const response = await fetch('http://localhost:5064/api/UpModule/Get_All_UpModule');
+  const response = await fetch('http://localhost:3000/modules');
   const data = await response.json();
-  console.log(data)
   return data;
 }
 
 
 export async function addExpense(obj){
-  await fetch(`http://localhost:5064/api/Expense/Create_Expense?Title=${obj.title}&Date=${obj.date}&Price=${obj.price}&Description=${obj.description}`,{
+  await fetch('http://localhost:3000/expense',{
     method:'POST',
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify({"title":obj.title, "date":obj.date, "price":obj.price, "receipt":obj.receipt, "file":obj.mModuleFile, "description":obj.description})
@@ -166,33 +152,30 @@ export async function getRegFee() {
 
 
 export async function addBatch(obj){
-  await fetch('http://localhost:5064/api/Batch/Create_Batch',{
+  await fetch('http://localhost:3000/batch',{
     method:'POST',
     headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({"batchName":obj.batch})
+    body: JSON.stringify({"batchname":obj.batch})
   })
   
 }
 
 export async function getBatch() {
-  const response = await fetch('http://localhost:5064/api/Batch/Get_All_Batch');
+  const response = await fetch('http://localhost:3000/batch');
   const data = await response.json();
-  console.log(data)
   return data;
 }
 
 
 export async function getFollowup() {
-  const response = await fetch('http://localhost:5064/api/FollowUp/Get_All_FollowUps');
+  const response = await fetch('http://localhost:3000/followup');
   const data = await response.json();
-  console.log(data);
   return data;
 }
 
 export async function getExpense() {
-  const response = await fetch('http://localhost:5064/api/Expense/Get_All_Expense');
+  const response = await fetch('http://localhost:3000/expense');
   const data = await response.json();
-  console.log(data)
   return data;
 }
 
