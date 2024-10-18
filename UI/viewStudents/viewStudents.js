@@ -30,13 +30,13 @@ async function getAllStudents(){
         let batchcell = document.createElement('td');
         batchcell.style.padding = "20px";
         batchcell.style.textAlign = "center";
-        batchcell.textContent = '';
+        batchcell.textContent = e.batchName;
         row.appendChild(batchcell);
 
         let coursecell = document.createElement('td');
         coursecell.style.padding = "20px";
         coursecell.style.textAlign = "center";
-        coursecell.textContent = '';
+        coursecell.textContent = e.courseId;
         row.appendChild(coursecell);
 
         let dateofjoincell = document.createElement('td');

@@ -5,10 +5,10 @@ namespace a_zApi.IServices
 {
     public interface IStudentService
     {
-        Task CreateStudent(StudentRequest studentRequest);
+        Task<StudentResponse> CreateStudent(StudentRequest studentRequest);
         Task<List<StudentResponse>> GetAllStudent();
         Task<StudentResponse> GetStudentById(string NicNo);
-        Task UpdateStudent(string NicNo, StudentUpdateRequest studentRequest);
-        Task DeleteStudentById(string NicNo);
+        Task<StudentResponse> DeleteStudentById(string NicNo);
+        Task<StudentResponse> UpdateStudent(string NicNo, StudentRequest studentRequest);
     }
 }
