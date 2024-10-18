@@ -1,0 +1,520 @@
+[
+  {
+    "ContainingType": "a_zApi.Controllers.BatchController",
+    "Method": "CreateBatch",
+    "RelativePath": "api/Batch/Create_Batch",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "batchRequest",
+        "Type": "a_zApi.DTO.RequestDto.BatchRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "a_zApi.Controllers.BatchController",
+    "Method": "GetAllBatch",
+    "RelativePath": "api/Batch/Get_All_Batch",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "a_zApi.Controllers.CourseController",
+    "Method": "CreateCourse",
+    "RelativePath": "api/Course/Create_Course",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "CourseId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "CourseName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "CourseImage",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
+      {
+        "Name": "Duration",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Fee",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Instructor",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Syllabus",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "a_zApi.Controllers.CourseController",
+    "Method": "DeleteCourseById",
+    "RelativePath": "api/Course/Delete_Course_By_Id",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "CourseId",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "a_zApi.Controllers.CourseController",
+    "Method": "GetAllCourses",
+    "RelativePath": "api/Course/Get_All_Course",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "a_zApi.Controllers.CourseController",
+    "Method": "GetCourseById",
+    "RelativePath": "api/Course/Get_Course_By_Id",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "CourseId",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "a_zApi.Controllers.CourseController",
+    "Method": "UpdateCourse",
+    "RelativePath": "api/Course/Update_Course",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "CourseId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "CourseId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "CourseName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "CourseImage",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
+      {
+        "Name": "Duration",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Fee",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Instructor",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Syllabus",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "a_zApi.Controllers.ExpenseController",
+    "Method": "CreateExpense",
+    "RelativePath": "api/Expense/Create_Expense",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Title",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Date",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      },
+      {
+        "Name": "Price",
+        "Type": "System.Decimal",
+        "IsRequired": false
+      },
+      {
+        "Name": "Receipt",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
+      {
+        "Name": "Description",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "a_zApi.Controllers.ExpenseController",
+    "Method": "GetAllExpense",
+    "RelativePath": "api/Expense/Get_All_Expense",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "a_zApi.Controllers.FollowUpController",
+    "Method": "CreateFollowUp",
+    "RelativePath": "api/FollowUp/Create_FollowUp",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "followUpRequestDto",
+        "Type": "a_zApi.DTO.RequestDto.FollowUpRequestDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "a_zApi.Controllers.FollowUpController",
+    "Method": "DeleteFollowUpById",
+    "RelativePath": "api/FollowUp/Delete_FollowUp",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Name",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "a_zApi.Controllers.FollowUpController",
+    "Method": "GetAllFollowUps",
+    "RelativePath": "api/FollowUp/Get_All_FollowUps",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "a_zApi.Controllers.FollowUpController",
+    "Method": "GetFollowUpById",
+    "RelativePath": "api/FollowUp/Get_FollowStudentBy_Name",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Name",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "a_zApi.Controllers.StudentController",
+    "Method": "CreateProduct",
+    "RelativePath": "api/Student/Create_Student",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "studentRequest",
+        "Type": "a_zApi.DTO.RequestDto.StudentRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "a_zApi.Controllers.StudentController",
+    "Method": "DeleteStudentById",
+    "RelativePath": "api/Student/Delete_Student-By-Id",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "NicNo",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "a_zApi.Controllers.StudentController",
+    "Method": "GetAllStudent",
+    "RelativePath": "api/Student/Get_All_Student",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "a_zApi.Controllers.StudentController",
+    "Method": "GetStudentById",
+    "RelativePath": "api/Student/Get_Student_By_Id",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "NicNo",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "a_zApi.Controllers.StudentController",
+    "Method": "UpdateStudent",
+    "RelativePath": "api/Student/Update_Student",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "NicNo",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "studentRequest",
+        "Type": "a_zApi.DTO.RequestDto.StudentRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "a_zApi.Controllers.StudentRegisterController",
+    "Method": "CreateStudentRegister",
+    "RelativePath": "api/StudentRegister",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "requestDto",
+        "Type": "a_zApi.DTO.RequestDto.StudentRegisterRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "a_zApi.DTO.ResponseDto.StudentRegisterResponse",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "a_zApi.Controllers.StudentRegisterController",
+    "Method": "GetAllStudentRegister",
+    "RelativePath": "api/StudentRegister",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[a_zApi.DTO.ResponseDto.StudentRegisterResponse, a_zApi, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "a_zApi.Controllers.StudentRegisterController",
+    "Method": "GetStudentRegister",
+    "RelativePath": "api/StudentRegister/{nicNo}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "nicNo",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "a_zApi.DTO.ResponseDto.StudentRegisterResponse",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "a_zApi.Controllers.StudentRegisterController",
+    "Method": "UpdateStudentRegister",
+    "RelativePath": "api/StudentRegister/{nicNo}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "nicNo",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "requestDto",
+        "Type": "a_zApi.DTO.RequestDto.StudentRegisterRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "a_zApi.DTO.ResponseDto.StudentRegisterResponse",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "a_zApi.Controllers.StudentRegisterController",
+    "Method": "DeleteStudentRegister",
+    "RelativePath": "api/StudentRegister/{nicNo}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "nicNo",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "a_zApi.Controllers.UpModuleController",
+    "Method": "GetAllUpModule",
+    "RelativePath": "api/UpModule/Get_All_UpModule",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "a_zApi.Controllers.UpModuleController",
+    "Method": "CreateUploadModule",
+    "RelativePath": "api/UpModule/Upload_Module",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Title",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "CourseId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Batch",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Date",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      },
+      {
+        "Name": "Uplode",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
+      {
+        "Name": "Description",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

@@ -26,13 +26,13 @@ reversed.forEach(e => {
         mobileCell.style.textAlign = "center";
         mobileCell.style.color = "#C54D4D";
         mobileCell.style.fontWeight = "bolder";
-        mobileCell.textContent = e.moblie;
+        mobileCell.textContent = e.mobile;
         row.appendChild(mobileCell);
 
         let courseCell = document.createElement('td');
         courseCell.style.padding = "20px";
         courseCell.style.textAlign = "center";
-        courseCell.textContent = e.courseId;
+        courseCell.textContent = e.course;
         row.appendChild(courseCell);
 
         let dateCell = document.createElement('td');
