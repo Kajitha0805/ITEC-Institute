@@ -3,7 +3,12 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.34928.147
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "a_zApi", "a_zApi\a_zApi.csproj", "{890B09D1-D51B-4AED-8045-14E1CAB0A20E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "a_zApi", "a_zApi\a_zApi.csproj", "{890B09D1-D51B-4AED-8045-14E1CAB0A20E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BA700386-3933-4726-B922-B3B86846C0FE}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

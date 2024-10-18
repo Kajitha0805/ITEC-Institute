@@ -17,5 +17,11 @@ namespace a_zApi.Enitity
         public string Address {  get; set; }
         public decimal RegFee {  get; set; }
         public decimal AdditionalFee {  get; set; }
+
+        public static implicit operator Student(Fee v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
+
